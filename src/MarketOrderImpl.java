@@ -1,4 +1,4 @@
-public class MarketOrderImpl {
+public class MarketOrderImpl implements MarketOrder{
 
     private double assetPrice;
     private double dollarVolume;
@@ -12,11 +12,11 @@ public class MarketOrderImpl {
         this.assetPrice = assetPrice;
         this.dollarVolume = dollarVolume;
     }
-
-    double getAssetPrice() {
+    @Override
+    public double getAssetPrice() {
         return assetPrice;
     }
-
+    @Override
     public void setAssetPrice(double assetPrice) {
         this.assetPrice = assetPrice;
     }
