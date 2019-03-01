@@ -1,3 +1,7 @@
+package lists;
+
+import orders.MarketOrderImpl;
+
 import java.text.DecimalFormat;
 
 public class MarketOrderList {
@@ -16,7 +20,7 @@ public class MarketOrderList {
     private double feePercentage;
 
 
-    MarketOrderList(int marketOrderType, int numberOfMarketOrders, double totalTradeCapital, double scalingRatio,
+    public MarketOrderList(int marketOrderType, int numberOfMarketOrders, double totalTradeCapital, double scalingRatio,
                     double maxMarketOrderPrice, double minMarketOrderPrice, double feePercentage) {
 
         this.marketOrderType = marketOrderType;
@@ -57,13 +61,13 @@ public class MarketOrderList {
         return totalTradeCapital;
     }
 
-    double getFirstOrderCapital() {
+    private double getFirstOrderCapital() {
 
         return (this.totalTradeCapital*(1-this.scalingRatio))/
                 (1-Math.pow(this.scalingRatio, this.numberOfMarketOrders));
     }
 
-    void setFirstMarketOrder() {
+    private void setFirstMarketOrder() {
         double firstMarketOrderPrice;
 
         if (marketOrderType == BUY)
@@ -76,7 +80,7 @@ public class MarketOrderList {
         marketOrders[0] = firstMarketOrder;
     }
 
-    void setThisMarketOrder(int currentIndex) {
+    private void setThisMarketOrder(int currentIndex) {
         double priceInterval = getPriceInterval();
 
         if(marketOrderType == BUY)
@@ -88,7 +92,7 @@ public class MarketOrderList {
         marketOrders[currentIndex] = thisMarketOrder;
     }
 
-    double getPriceInterval() {
+    private double getPriceInterval() {
 
         return (maxMarketOrderPrice-minMarketOrderPrice)/(numberOfMarketOrders - 1);
     }
@@ -97,7 +101,7 @@ public class MarketOrderList {
          return marketOrders[currentIndex - 1];
      }
 
-    void buildOrderList() {
+    private void buildOrderList() {
         setFirstMarketOrder();
 
         for(int i = 1; i < marketOrders.length; i++) {
@@ -105,7 +109,7 @@ public class MarketOrderList {
         }
     }
 
-    void printList() {
+    public void printList() {
         DecimalFormat numberFormat = new DecimalFormat("#.00");
 
         for (MarketOrderImpl marketOrder : marketOrders) {
@@ -114,7 +118,7 @@ public class MarketOrderList {
         }
     }
 
-    double weightedAverage() {
+    private double weightedAverage() {
         double sumProduct = 0;
         double sum = 0;
 
@@ -127,7 +131,7 @@ public class MarketOrderList {
         return sumProduct/sum;
     }
 
-    void printListAndWeightedAverage() {
+    public void printListAndWeightedAverage() {
         printList();
         System.out.println("\nWeighted Average: " + weightedAverage());
     }

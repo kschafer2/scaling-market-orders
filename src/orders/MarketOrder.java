@@ -1,3 +1,5 @@
+package orders;
+
 public abstract class MarketOrder {
 
     double assetPrice;

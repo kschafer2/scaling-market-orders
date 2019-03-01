@@ -1,6 +1,10 @@
-public class SellMarketOrder extends MarketOrder {
+package orders;
 
-    public SellMarketOrder(double assetPrice, double tradeVolume) {
+public class BuyMarketOrder extends MarketOrder {
+
+    private double feePercentage;
+
+    public BuyMarketOrder(double assetPrice, double tradeVolume) {
         super(assetPrice, tradeVolume);
     }
 
@@ -11,6 +15,6 @@ public class SellMarketOrder extends MarketOrder {
 
     @Override
     public void setAssetPrice(double assetPrice) {
-        this.assetPrice = assetPrice;
+
     }
 }

@@ -1,6 +1,5 @@
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import lists.MarketOrderList;
+
 import java.util.Scanner;
 
 /********************************************************************************
@@ -12,7 +11,7 @@ import java.util.Scanner;
  *	 	and break even price.												    *
  *********************************************************************************/
 
-public class OrderList {
+public class MarketOrderApplication {
 
     public static void main(String[] args) {
 
