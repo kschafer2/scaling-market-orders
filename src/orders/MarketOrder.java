@@ -2,17 +2,27 @@ package orders;
 
 public abstract class MarketOrder {
 
-    double assetPrice;
-    double tradeVolume;
+    private double assetPrice;
+    private double tradeVolume;
 
     public MarketOrder(double assetPrice, double tradeVolume) {
         this.assetPrice = assetPrice;
         this.tradeVolume = tradeVolume;
     }
 
-    abstract double getAssetPrice();
+    public double getAssetPrice() {
+        return assetPrice;
+    }
 
-    abstract void setAssetPrice(double assetPrice);
+    public void setAssetPrice(double assetPrice) {
+        this.assetPrice = assetPrice;
+    }
 
+    public double getTradeVolume() {
+        return tradeVolume;
+    }
 
+    public void setTradeVolume(double tradeVolume) {
+        this.tradeVolume = tradeVolume;
+    }
 }

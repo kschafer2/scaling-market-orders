@@ -8,13 +8,4 @@ public class BuyMarketOrder extends MarketOrder {
         super(assetPrice, tradeVolume);
     }
 
-    @Override
-    public double getAssetPrice() {
-        return assetPrice;
-    }
-
-    @Override
-    public void setAssetPrice(double assetPrice) {
-
-    }
 }

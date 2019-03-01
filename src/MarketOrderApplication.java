@@ -1,4 +1,8 @@
+import fees.PercentageFee;
 import lists.MarketOrderList;
+import orders.BuyMarketOrder;
+import orders.FeeMarketOrder;
+import orders.MarketOrder;
 
 import java.util.Scanner;
 
@@ -20,13 +24,24 @@ public class MarketOrderApplication {
         double tradeCapital,  //amount of capital desired for the trade
                 feePercentage, //percentage of capital reserved for trading fees
                 scalingRatio,  //geometric ratio from one order to the next
-                    //Example: 1.2 increases next order by 20%
-                    //of the current order
+                //Example: 1.2 increases next order by 20%
+                //of the current order
                 minPrice,      //smallest order to place
                 maxPrice;      //largest order to place
 
-        int    orderType,		  //to hold user's option to buy or sell
+        int orderType,          //to hold user's option to buy or sell
                 numberOrders;  //number of orders to place for the trade
+/*
+        PercentageFee fee = new PercentageFee(1);
+        FeeMarketOrder order = new FeeMarketOrder(100, 500, fee);
+        System.out.println(fee.getValue());
+        order.applyFee();
+        System.out.println(fee.getValue());
+        System.out.println(order.getTradeVolume());
+        System.out.println(order.getAssetPrice());
+
+    }
+*/
 
 /********************************************************************************/
 
