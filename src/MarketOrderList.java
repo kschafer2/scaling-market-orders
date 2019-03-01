@@ -1,13 +1,13 @@
 import java.text.DecimalFormat;
 
 public class MarketOrderList {
-    public static final int BUY = 1;
-    public static final int SELL = 2;
+    private static final int BUY = 1;
+    private static final int SELL = 2;
 
     private int numberOfMarketOrders;
     private int marketOrderType;
 
-    MarketOrderImpl[] marketOrders;
+    private MarketOrderImpl[] marketOrders;
 
     private double totalTradeCapital;
     private double scalingRatio;
@@ -83,7 +83,7 @@ public class MarketOrderList {
             priceInterval /= -1;
 
         MarketOrderImpl thisMarketOrder = new MarketOrderImpl(getPreviousMarketOrder(currentIndex).getAssetPrice()
-                + priceInterval, getPreviousMarketOrder(currentIndex).getDollarVolume() * scalingRatio);
+                + priceInterval, getPreviousMarketOrder(currentIndex).getTradeVolume() * scalingRatio);
 
         marketOrders[currentIndex] = thisMarketOrder;
     }
@@ -110,7 +110,7 @@ public class MarketOrderList {
 
         for (MarketOrderImpl marketOrder : marketOrders) {
             System.out.println(numberFormat.format(marketOrder.getAssetPrice()) + "\t"
-                    + marketOrder.getDollarVolume());
+                    + marketOrder.getTradeVolume());
         }
     }
 
@@ -120,8 +120,8 @@ public class MarketOrderList {
 
 
         for (MarketOrderImpl marketOrder : marketOrders) {
-            sumProduct += (marketOrder.getAssetPrice() * marketOrder.getDollarVolume());
-            sum += marketOrder.getDollarVolume();
+            sumProduct += (marketOrder.getAssetPrice() * marketOrder.getTradeVolume());
+            sum += marketOrder.getTradeVolume();
         }
 
         return sumProduct/sum;

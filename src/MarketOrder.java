@@ -1,9 +1,16 @@
-public interface MarketOrder {
+public abstract class MarketOrder {
 
-    double assetPrice = 0;
+    double assetPrice;
+    double tradeVolume;
 
-    double getAssetPrice();
-    void setAssetPrice(double assetPrice);
+    public MarketOrder(double assetPrice, double tradeVolume) {
+        this.assetPrice = assetPrice;
+        this.tradeVolume = tradeVolume;
+    }
+
+    abstract double getAssetPrice();
+
+    abstract void setAssetPrice(double assetPrice);
 
 
 }
