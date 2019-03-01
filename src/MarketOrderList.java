@@ -7,7 +7,7 @@ public class MarketOrderList {
     private int numberOfMarketOrders;
     private int marketOrderType;
 
-    MarketOrder[] marketOrders;
+    MarketOrderImpl[] marketOrders;
 
     private double totalTradeCapital;
     private double scalingRatio;
@@ -22,7 +22,7 @@ public class MarketOrderList {
         this.marketOrderType = marketOrderType;
         this.numberOfMarketOrders = numberOfMarketOrders;
 
-        this.marketOrders = new MarketOrder[numberOfMarketOrders];
+        this.marketOrders = new MarketOrderImpl[numberOfMarketOrders];
 
         if(this.marketOrderType == SELL)
             this.feePercentage = 0;
@@ -71,10 +71,10 @@ public class MarketOrderList {
         else
             firstMarketOrderPrice = minMarketOrderPrice;
 
-        MarketOrder firstMarketOrder = new MarketOrder(firstMarketOrderPrice, getFirstOrderCapital());
+        MarketOrderImpl firstMarketOrder = new MarketOrderImpl(firstMarketOrderPrice, getFirstOrderCapital());
 
         marketOrders[0] = firstMarketOrder;
-    };
+    }
 
     void setThisMarketOrder(int currentIndex) {
         double priceInterval = getPriceInterval();
@@ -82,20 +82,18 @@ public class MarketOrderList {
         if(marketOrderType == BUY)
             priceInterval /= -1;
 
-        MarketOrder thisMarketOrder = new MarketOrder(getPreviousMarketOrder(currentIndex).getAssetPrice()
+        MarketOrderImpl thisMarketOrder = new MarketOrderImpl(getPreviousMarketOrder(currentIndex).getAssetPrice()
                 + priceInterval, getPreviousMarketOrder(currentIndex).getDollarVolume() * scalingRatio);
 
         marketOrders[currentIndex] = thisMarketOrder;
-    };
+    }
 
     double getPriceInterval() {
 
-        double priceInterval = (maxMarketOrderPrice-minMarketOrderPrice)/(numberOfMarketOrders - 1);
-
-        return priceInterval;
+        return (maxMarketOrderPrice-minMarketOrderPrice)/(numberOfMarketOrders - 1);
     }
 
-     MarketOrder getPreviousMarketOrder(int currentIndex) {
+     MarketOrderImpl getPreviousMarketOrder(int currentIndex) {
          return marketOrders[currentIndex - 1];
      }
 
@@ -110,9 +108,9 @@ public class MarketOrderList {
     void printList() {
         DecimalFormat numberFormat = new DecimalFormat("#.00");
 
-        for(int i = 0; i < marketOrders.length; i++) {
-            System.out.println(numberFormat.format(marketOrders[i].getAssetPrice()) + "\t"
-                    + marketOrders[i].getDollarVolume());
+        for (MarketOrderImpl marketOrder : marketOrders) {
+            System.out.println(numberFormat.format(marketOrder.getAssetPrice()) + "\t"
+                    + marketOrder.getDollarVolume());
         }
     }
 
@@ -121,9 +119,9 @@ public class MarketOrderList {
         double sum = 0;
 
 
-        for(int i = 0; i < marketOrders.length; i++) {
-            sumProduct += (marketOrders[i].getAssetPrice() * marketOrders[i].getDollarVolume());
-            sum += marketOrders[i].getDollarVolume();
+        for (MarketOrderImpl marketOrder : marketOrders) {
+            sumProduct += (marketOrder.getAssetPrice() * marketOrder.getDollarVolume());
+            sum += marketOrder.getDollarVolume();
         }
 
         return sumProduct/sum;
