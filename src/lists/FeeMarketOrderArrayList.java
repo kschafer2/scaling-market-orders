@@ -5,22 +5,22 @@ import orders.FeeMarketOrder;
 import orders.MarketOrder;
 import orders.MarketOrderImpl;
 import support.TradeCalculations;
-import support.TradeCalculationsImpl;
+import support.ScalingTradeCalculations;
 import support.TradeData;
 
 import java.util.ArrayList;
 
-public class MarketOrderArrayList implements MarketOrderListInt{
+public class FeeMarketOrderArrayList implements MarketOrderList {
 
     private ArrayList<MarketOrder> marketOrderList;
     private TradeData data;
     private TradeCalculations calculations;
     private Fee fee;
 
-    public MarketOrderArrayList(TradeData data, Fee fee) {
+    public FeeMarketOrderArrayList(TradeData data, Fee fee) {
         this.data = data;
-        calculations = new TradeCalculationsImpl(data);
-        marketOrderList = new ArrayList<MarketOrder>();
+        calculations = new ScalingTradeCalculations(data);
+        marketOrderList = new ArrayList<>();
         this.fee = fee;
 
         buildOrderList();
@@ -30,6 +30,7 @@ public class MarketOrderArrayList implements MarketOrderListInt{
     public void setFirstMarketOrder() {
         marketOrderList.add(new FeeMarketOrder(calculations.calculateFirstMarketOrderPrice(),
                 calculations.calculateFirstMarketOrderVolume(), fee));
+
     }
 
     @Override

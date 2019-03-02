@@ -1,6 +1,8 @@
 package fees;
 
-public abstract class Fee {
+import support.TradeData;
+
+public abstract class Fee implements FeeInt {
 
     private double value;
 
@@ -8,13 +10,8 @@ public abstract class Fee {
         this.value = value;
     }
 
+    @Override
     public double getValue() {
         return value;
     }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public abstract double calculateFee();
 }

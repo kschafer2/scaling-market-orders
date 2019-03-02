@@ -9,6 +9,7 @@ public class FeeMarketOrder extends MarketOrder {
     public FeeMarketOrder(double assetPrice, double tradeVolume, Fee fee) {
         super(assetPrice, tradeVolume);
         this.fee = fee;
+
         applyFee();
     }
 

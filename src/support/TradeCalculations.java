@@ -1,26 +1,24 @@
 package support;
 
-public abstract class TradeCalculations {
+public abstract class TradeCalculations implements FirstMarketOrderCalculations, NextMarketOrderCalculations {
 
     TradeData data;
 
-    public TradeCalculations(TradeData data) {
+    TradeCalculations(TradeData data) {
         this.data = data;
     }
 
-    public double calculateMarketOrderPriceRange() {
+    double calculateMarketOrderPriceRange() {
         return data.getMaxMarketOrderPrice() - data.getMinMarketOrderPrice();
     }
 
-    public abstract double calculateMarketOrderPriceInterval();
+    double calculateMarketOrderPriceInterval() {
+        if(data.getTradeType() == TradeType.BUY)
+            return (calculateMarketOrderPriceRange()/(data.getNumberOfMarketOrders() - 1)) / (-1);
 
-    public abstract double calculateFirstMarketOrderVolume();
-
-    public abstract double calculateFirstMarketOrderPrice();
-
-    public abstract double calculateNextMarketOrderVolume(double previousVolume);
-
-    public abstract double calculateNextMarketOrderPrice(double previousPrice);
+        else
+            return calculateMarketOrderPriceRange()/(data.getNumberOfMarketOrders() - 1);
+    }
 }
 
 

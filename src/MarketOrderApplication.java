@@ -1,6 +1,5 @@
 import fees.PercentageFee;
-import lists.MarketOrderArrayList;
-import lists.MarketOrderList;
+import lists.FeeMarketOrderArrayList;
 import support.TradeData;
 import support.TradeDataImpl;
 import support.TradeType;
@@ -38,7 +37,7 @@ public class MarketOrderApplication {
         TradeData data = new TradeDataImpl(TradeType.BUY, 5000, 1.2,
                 20, 1000, 10000);
 
-        MarketOrderArrayList list = new MarketOrderArrayList(data, fee);
+        FeeMarketOrderArrayList list = new FeeMarketOrderArrayList(data, fee);
     }
 
 
@@ -66,7 +65,7 @@ public class MarketOrderApplication {
          System.out.print("\nMinimum price: ");
           minPrice = keyboard.nextDouble();
 
-            MarketOrderList orderList = new MarketOrderList(orderType, numberOrders, tradeCapital, scalingRatio,
+            MarketOrderListOriginal orderList = new MarketOrderListOriginal(orderType, numberOrders, tradeCapital, scalingRatio,
                                                             maxPrice, minPrice, feePercentage);
             orderList.printListAndWeightedAverage();
     }

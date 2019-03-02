@@ -1,18 +1,9 @@
 package support;
 
-public class TradeCalculationsImpl extends TradeCalculations {
+public class ScalingTradeCalculations extends TradeCalculations {
 
-    public TradeCalculationsImpl(TradeData data) {
+    public ScalingTradeCalculations(TradeData data) {
         super(data);
-    }
-
-    @Override
-    public double calculateMarketOrderPriceInterval() {
-        if(data.getTradeType() == TradeType.BUY)
-            return (calculateMarketOrderPriceRange()/(data.getNumberOfMarketOrders() - 1)) / (-1);
-
-        else
-            return calculateMarketOrderPriceRange()/(data.getNumberOfMarketOrders() - 1);
     }
 
     @Override

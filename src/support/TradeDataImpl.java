@@ -8,4 +8,5 @@ public class TradeDataImpl extends TradeData {
         super(tradeType, tradeVolume, scalingRatio, numberOfMarketOrders,
                 minMarketOrderPrice, maxMarketOrderPrice);
     }
+
 }
