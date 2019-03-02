@@ -1,12 +1,12 @@
 package lists;
 
+import calculations.ScalingTradeCalculations;
+import calculations.TradeCalculations;
+import data.TradeData;
 import fees.Fee;
 import orders.FeeMarketOrder;
 import orders.MarketOrder;
 import orders.MarketOrderImpl;
-import support.TradeCalculations;
-import support.ScalingTradeCalculations;
-import support.TradeData;
 
 import java.util.ArrayList;
 

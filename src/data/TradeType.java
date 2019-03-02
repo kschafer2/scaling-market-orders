@@ -1,4 +1,4 @@
-package support;
+package data;
 
 public enum TradeType {
     BUY,

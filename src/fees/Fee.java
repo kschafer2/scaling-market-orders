@@ -1,7 +1,5 @@
 package fees;
 
-import support.TradeData;
-
 public abstract class Fee implements FeeInt {
 
     private double value;

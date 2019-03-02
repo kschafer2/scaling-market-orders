@@ -1,4 +1,4 @@
-package support;
+package data;
 
 public class TradeDataImpl extends TradeData {
 

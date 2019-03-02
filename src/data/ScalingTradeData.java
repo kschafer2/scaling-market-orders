@@ -1,6 +1,6 @@
-package support;
+package data;
 
-public class ScalingTradeData extends TradeData{
+public class ScalingTradeData extends TradeData {
 
     private double scalingRatio;
 

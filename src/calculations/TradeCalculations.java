@@ -1,4 +1,7 @@
-package support;
+package calculations;
+
+import data.TradeData;
+import data.TradeType;
 
 public abstract class TradeCalculations implements FirstMarketOrderCalculations, NextMarketOrderCalculations {
 

@@ -1,4 +1,4 @@
-package support;
+package calculations;
 
 public interface NextMarketOrderCalculations {
 

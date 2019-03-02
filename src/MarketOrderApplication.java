@@ -1,8 +1,8 @@
+import data.TradeData;
+import data.TradeDataImpl;
+import data.TradeType;
 import fees.PercentageFee;
 import lists.FeeMarketOrderArrayList;
-import support.TradeData;
-import support.TradeDataImpl;
-import support.TradeType;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package support;
+package data;
 
 public abstract class TradeData implements TradeDataInt {
 
@@ -9,7 +9,7 @@ public abstract class TradeData implements TradeDataInt {
     private double minMarketOrderPrice;
     private double maxMarketOrderPrice;
 
-    TradeData(TradeType tradeType, double tradeVolume, double scalingRatio, int numberOfMarketOrders,
+    public TradeData(TradeType tradeType, double tradeVolume, double scalingRatio, int numberOfMarketOrders,
                      double minMarketOrderPrice, double maxMarketOrderPrice) {
 
         this.tradeType = tradeType;
