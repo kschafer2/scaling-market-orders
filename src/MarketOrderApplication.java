@@ -1,8 +1,9 @@
 import fees.PercentageFee;
+import lists.MarketOrderArrayList;
 import lists.MarketOrderList;
-import orders.BuyMarketOrder;
-import orders.FeeMarketOrder;
-import orders.MarketOrder;
+import support.TradeData;
+import support.TradeDataImpl;
+import support.TradeType;
 
 import java.util.Scanner;
 
@@ -31,19 +32,17 @@ public class MarketOrderApplication {
 
         int orderType,          //to hold user's option to buy or sell
                 numberOrders;  //number of orders to place for the trade
-/*
+
         PercentageFee fee = new PercentageFee(1);
-        FeeMarketOrder order = new FeeMarketOrder(100, 500, fee);
-        System.out.println(fee.getValue());
-        order.applyFee();
-        System.out.println(fee.getValue());
-        System.out.println(order.getTradeVolume());
-        System.out.println(order.getAssetPrice());
 
+        TradeData data = new TradeDataImpl(TradeType.BUY, 5000, 1.2,
+                20, 1000, 10000);
+
+        MarketOrderArrayList list = new MarketOrderArrayList(data, fee);
     }
-*/
 
-/********************************************************************************/
+
+/********************************************************************************
 
         DisplayMenu();
         orderType = keyboard.nextInt();

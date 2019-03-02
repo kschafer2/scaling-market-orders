@@ -1,7 +1,5 @@
 package fees;
 
-import orders.MarketOrder;
-
 public abstract class Fee {
 
     private double value;

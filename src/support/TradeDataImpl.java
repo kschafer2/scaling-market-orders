@@ -1,9 +1,11 @@
 package support;
 
 public class TradeDataImpl extends TradeData {
-    public TradeDataImpl(double tradeVolume, double scalingRatio, double numberOfMarketOrders,
+
+    public TradeDataImpl(TradeType tradeType, double tradeVolume, double scalingRatio, int numberOfMarketOrders,
                          double minMarketOrderPrice, double maxMarketOrderPrice) {
 
-        super(tradeVolume, scalingRatio, numberOfMarketOrders, minMarketOrderPrice, maxMarketOrderPrice);
+        super(tradeType, tradeVolume, scalingRatio, numberOfMarketOrders,
+                minMarketOrderPrice, maxMarketOrderPrice);
     }
 }

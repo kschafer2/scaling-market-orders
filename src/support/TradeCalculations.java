@@ -4,6 +4,10 @@ public abstract class TradeCalculations {
 
     TradeData data;
 
+    public TradeCalculations(TradeData data) {
+        this.data = data;
+    }
+
     public double calculateMarketOrderPriceRange() {
         return data.getMaxMarketOrderPrice() - data.getMinMarketOrderPrice();
     }
@@ -11,6 +15,8 @@ public abstract class TradeCalculations {
     public abstract double calculateMarketOrderPriceInterval();
 
     public abstract double calculateFirstMarketOrderVolume();
+
+    public abstract double calculateFirstMarketOrderPrice();
 
     public abstract double calculateNextMarketOrderVolume(double previousVolume);
 

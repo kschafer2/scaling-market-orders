@@ -3,15 +3,16 @@ package support;
 public abstract class TradeData {
 
     private TradeType tradeType;
+    private int numberOfMarketOrders;
     private double tradeVolume;
     private double scalingRatio;
-    private double numberOfMarketOrders;
     private double minMarketOrderPrice;
     private double maxMarketOrderPrice;
 
-    public TradeData(double tradeVolume, double scalingRatio, double numberOfMarketOrders,
+    public TradeData(TradeType tradeType, double tradeVolume, double scalingRatio, int numberOfMarketOrders,
                      double minMarketOrderPrice, double maxMarketOrderPrice) {
 
+        this.tradeType = tradeType;
         this.tradeVolume = tradeVolume;
         this.scalingRatio = scalingRatio;
         this.numberOfMarketOrders = numberOfMarketOrders;
@@ -31,7 +32,7 @@ public abstract class TradeData {
         return scalingRatio;
     }
 
-    public double getNumberOfMarketOrders() {
+    public int getNumberOfMarketOrders() {
         return numberOfMarketOrders;
     }
 

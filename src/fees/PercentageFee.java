@@ -1,7 +1,5 @@
 package fees;
 
-import orders.MarketOrder;
-
 public class PercentageFee extends Fee {
 
     public PercentageFee(double value) {
