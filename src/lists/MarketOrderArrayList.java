@@ -3,6 +3,7 @@ package lists;
 import fees.Fee;
 import orders.FeeMarketOrder;
 import orders.MarketOrder;
+import orders.MarketOrderImpl;
 import support.TradeCalculations;
 import support.TradeCalculationsImpl;
 import support.TradeData;
@@ -35,7 +36,7 @@ public class MarketOrderArrayList implements MarketOrderListInt{
     public void setMarketOrder(int i) {
         double price = calculations.calculateNextMarketOrderPrice(marketOrderList.get(i-1).getAssetPrice());
         double volume = calculations.calculateNextMarketOrderVolume(marketOrderList.get(i-1).getTradeVolume());
-        marketOrderList.add(new FeeMarketOrder(price, volume, fee));
+        marketOrderList.add(new MarketOrderImpl(price, volume));
     }
 
     @Override
