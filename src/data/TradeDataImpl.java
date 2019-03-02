@@ -1,11 +1,11 @@
 package data;
 
-public class TradeDataImpl extends TradeData {
+public class TradeDataImpl extends AbstractTradeData {
 
-    public TradeDataImpl(TradeType tradeType, double tradeVolume, double scalingRatio, int numberOfMarketOrders,
+    public TradeDataImpl(TradeType tradeType, double tradeVolume, int numberOfMarketOrders,
                          double minMarketOrderPrice, double maxMarketOrderPrice) {
 
-        super(tradeType, tradeVolume, scalingRatio, numberOfMarketOrders,
+        super(tradeType, tradeVolume, numberOfMarketOrders,
                 minMarketOrderPrice, maxMarketOrderPrice);
     }
 

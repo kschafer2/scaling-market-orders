@@ -1,6 +1,6 @@
 package fees;
 
-public class PercentageFee extends Fee {
+public class PercentageFee extends AbstractFee {
 
     public PercentageFee(double value) {
         super(value);

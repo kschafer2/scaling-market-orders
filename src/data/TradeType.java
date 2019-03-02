@@ -1,6 +1,5 @@
 package data;
 
 public enum TradeType {
-    BUY,
-    SELL
+    BUY, SELL
 }

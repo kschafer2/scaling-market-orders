@@ -1,15 +1,7 @@
 package fees;
 
-public abstract class Fee implements FeeInt {
+public interface Fee {
 
-    private double value;
-
-    Fee(double value) {
-        this.value = value;
-    }
-
-    @Override
-    public double getValue() {
-        return value;
-    }
+    double getValue();
+    double calculateFee();
 }

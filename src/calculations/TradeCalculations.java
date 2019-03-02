@@ -1,27 +1,8 @@
 package calculations;
 
-import data.TradeData;
-import data.TradeType;
+public interface TradeCalculations extends FirstMarketOrderCalculations, NextMarketOrderCalculations {
 
-public abstract class TradeCalculations implements FirstMarketOrderCalculations, NextMarketOrderCalculations {
+    double calculateMarketOrderPriceRange();
 
-    TradeData data;
-
-    TradeCalculations(TradeData data) {
-        this.data = data;
-    }
-
-    double calculateMarketOrderPriceRange() {
-        return data.getMaxMarketOrderPrice() - data.getMinMarketOrderPrice();
-    }
-
-    double calculateMarketOrderPriceInterval() {
-        if(data.getTradeType() == TradeType.BUY)
-            return (calculateMarketOrderPriceRange()/(data.getNumberOfMarketOrders() - 1)) / (-1);
-
-        else
-            return calculateMarketOrderPriceRange()/(data.getNumberOfMarketOrders() - 1);
-    }
+    double calculateMarketOrderPriceInterval();
 }
-
-

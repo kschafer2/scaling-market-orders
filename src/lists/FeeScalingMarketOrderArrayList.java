@@ -1,28 +1,38 @@
 package lists;
 
 import calculations.ScalingTradeCalculations;
-import calculations.TradeCalculations;
-import data.TradeData;
-import fees.Fee;
+import calculations.AbstractTradeCalculations;
+import data.ScalingTradeData;
+import data.AbstractTradeData;
+import fees.AbstractFee;
 import orders.FeeMarketOrder;
 import orders.MarketOrder;
 import orders.MarketOrderImpl;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class FeeMarketOrderArrayList implements MarketOrderList {
+public class FeeScalingMarketOrderArrayList extends AbstractMarketOrderList {
 
-    private ArrayList<MarketOrder> marketOrderList;
-    private TradeData data;
-    private TradeCalculations calculations;
-    private Fee fee;
+    //private List<MarketOrder> marketOrderList;
+    //private AbstractTradeData data;
+    //private AbstractTradeCalculations calculations;
+    private AbstractFee fee;
 
-    public FeeMarketOrderArrayList(TradeData data, Fee fee) {
+    /*public FeeScalingMarketOrderArrayList(ScalingTradeData data, AbstractFee fee) {
         this.data = data;
         calculations = new ScalingTradeCalculations(data);
         marketOrderList = new ArrayList<>();
         this.fee = fee;
 
+        buildOrderList();
+    }*/
+
+    public FeeScalingMarketOrderArrayList(ScalingTradeData data, AbstractFee fee) {
+        super(data);
+        calculations = new ScalingTradeCalculations(data);
+        marketOrderList = new ArrayList<>();
+        this.fee = fee;
         buildOrderList();
     }
 

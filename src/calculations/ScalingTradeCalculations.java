@@ -1,18 +1,21 @@
 package calculations;
 
-import data.TradeData;
+import data.ScalingTradeData;
 import data.TradeType;
 
-public class ScalingTradeCalculations extends TradeCalculations {
+public class ScalingTradeCalculations extends AbstractTradeCalculations {
 
-    public ScalingTradeCalculations(TradeData data) {
+    ScalingTradeData data;
+
+    public ScalingTradeCalculations(ScalingTradeData data) {
         super(data);
+        this.data = data;
     }
 
     @Override
     public double calculateFirstMarketOrderVolume() {
-        return (data.getTradeVolume()*(1-data.getScalingRatio()))/
-                (1-Math.pow(data.getScalingRatio(), data.getNumberOfMarketOrders()));
+        return (data.getTradeVolume() * (1 - data.getScalingRatio())) /
+                (1 - Math.pow(data.getScalingRatio(), data.getNumberOfMarketOrders()));
     }
 
     @Override
@@ -31,6 +34,11 @@ public class ScalingTradeCalculations extends TradeCalculations {
 
     @Override
     public double calculateNextMarketOrderPrice(double previousPrice) {
-        return previousPrice + calculateMarketOrderPriceInterval();
+
+        if(data.getTradeType() == TradeType.BUY)
+            return previousPrice - calculateMarketOrderPriceInterval();
+
+        else
+            return previousPrice + calculateMarketOrderPriceInterval();
     }
 }

@@ -1,8 +1,8 @@
-import data.TradeData;
-import data.TradeDataImpl;
+import data.ScalingTradeData;
 import data.TradeType;
 import fees.PercentageFee;
-import lists.FeeMarketOrderArrayList;
+import lists.FeeScalingMarketOrderArrayList;
+import lists.MarketOrderList;
 
 import java.util.Scanner;
 
@@ -34,10 +34,10 @@ public class MarketOrderApplication {
 
         PercentageFee fee = new PercentageFee(1);
 
-        TradeData data = new TradeDataImpl(TradeType.BUY, 5000, 1.2,
-                20, 1000, 10000);
+        ScalingTradeData data = new ScalingTradeData(TradeType.BUY, 5000, 1.2,20,
+                1000, 10000);
 
-        FeeMarketOrderArrayList list = new FeeMarketOrderArrayList(data, fee);
+        MarketOrderList list = new FeeScalingMarketOrderArrayList(data, fee);
     }
 
 

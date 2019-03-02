@@ -1,46 +1,14 @@
 package data;
 
-public abstract class TradeData implements TradeDataInt {
+public interface TradeData {
 
-    private TradeType tradeType;
-    private int numberOfMarketOrders;
-    private double tradeVolume;
-    private double scalingRatio;
-    private double minMarketOrderPrice;
-    private double maxMarketOrderPrice;
+    TradeType getTradeType();
 
-    public TradeData(TradeType tradeType, double tradeVolume, double scalingRatio, int numberOfMarketOrders,
-                     double minMarketOrderPrice, double maxMarketOrderPrice) {
+    double getTradeVolume();
 
-        this.tradeType = tradeType;
-        this.tradeVolume = tradeVolume;
-        this.scalingRatio = scalingRatio;
-        this.numberOfMarketOrders = numberOfMarketOrders;
-        this.minMarketOrderPrice = minMarketOrderPrice;
-        this.maxMarketOrderPrice = maxMarketOrderPrice;
-    }
+    int getNumberOfMarketOrders();
 
-    public TradeType getTradeType() {
-        return tradeType;
-    }
+    double getMinMarketOrderPrice();
 
-    public double getTradeVolume() {
-        return tradeVolume;
-    }
-
-    public double getScalingRatio() {
-        return scalingRatio;
-    }
-
-    public int getNumberOfMarketOrders() {
-        return numberOfMarketOrders;
-    }
-
-    public double getMinMarketOrderPrice() {
-        return minMarketOrderPrice;
-    }
-
-    public double getMaxMarketOrderPrice() {
-        return maxMarketOrderPrice;
-    }
+    double getMaxMarketOrderPrice();
 }
