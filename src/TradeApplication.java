@@ -1,8 +1,5 @@
-import calculations.GeometricScalingTradeCalculations;
 import data.GeometricScalingTradeData;
-import data.TradeData;
 import data.TradeType;
-import fees.Fee;
 import fees.PercentageFee;
 import trades.PercentageFeeGeometricScalableTrade;
 

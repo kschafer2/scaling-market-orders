@@ -1,6 +1,5 @@
 package calculations;
 
-import data.AbstractTradeData;
 import data.GeometricScalingTradeData;
 
 public abstract class AbstractGeometricScalingTradeCalculations implements TradeCalculations {

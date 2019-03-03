@@ -1,8 +1,6 @@
 package trades;
 
-import calculations.GeometricScalingTradeCalculations;
 import data.GeometricScalingTradeData;
-import fees.Fee;
 import fees.PercentageFee;
 import orders.FeeMarketOrder;
 import orders.MarketOrderImpl;
