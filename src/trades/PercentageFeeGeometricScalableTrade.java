@@ -14,6 +14,7 @@ public class PercentageFeeGeometricScalableTrade extends AbstractGeometricScalab
     public PercentageFeeGeometricScalableTrade(GeometricScalingTradeData data, PercentageFee fee) {
         super(data);
         this.fee = fee;
+        build();
     }
 
     @Override
