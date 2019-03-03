@@ -2,7 +2,7 @@ package orders;
 
 import fees.AbstractFee;
 
-public class FeeMarketOrder extends MarketOrder {
+public class FeeMarketOrder extends AbstractMarketOrder {
 
     private AbstractFee fee;
 

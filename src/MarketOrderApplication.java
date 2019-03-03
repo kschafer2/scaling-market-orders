@@ -1,8 +1,9 @@
-import data.ScalingTradeData;
+import data.GeometricScalingTradeData;
 import data.TradeType;
+import fees.AbstractFee;
 import fees.PercentageFee;
+import lists.AbstractMarketOrderList;
 import lists.FeeScalingMarketOrderArrayList;
-import lists.MarketOrderList;
 
 import java.util.Scanner;
 
@@ -32,12 +33,12 @@ public class MarketOrderApplication {
         int orderType,          //to hold user's option to buy or sell
                 numberOrders;  //number of orders to place for the trade
 
-        PercentageFee fee = new PercentageFee(1);
+        AbstractFee fee = new PercentageFee(1);
 
-        ScalingTradeData data = new ScalingTradeData(TradeType.BUY, 5000, 1.2,20,
+        GeometricScalingTradeData data = new GeometricScalingTradeData(TradeType.BUY, 5000, 1.2,20,
                 1000, 10000);
 
-        MarketOrderList list = new FeeScalingMarketOrderArrayList(data, fee);
+        AbstractMarketOrderList list = new FeeScalingMarketOrderArrayList(data, fee);
     }
 
 

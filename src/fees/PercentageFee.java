@@ -8,6 +8,6 @@ public class PercentageFee extends AbstractFee {
 
     @Override
     public double calculateFee() {
-         return (getValue()/100);
+         return (getFee()/100);
     }
 }

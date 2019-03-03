@@ -1,6 +1,6 @@
 package calculations;
 
-public interface TradeCalculations extends FirstMarketOrderCalculations, NextMarketOrderCalculations {
+public interface TradeCalculations {
 
     double calculateMarketOrderPriceRange();
 

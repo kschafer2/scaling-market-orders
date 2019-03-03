@@ -1,16 +1,17 @@
 package lists;
 
-import calculations.AbstractTradeCalculations;
+import buildable.Buildable;
+import calculations.GeometricScalingTradeCalculations;
 import data.AbstractTradeData;
-import orders.MarketOrder;
+import orders.AbstractMarketOrder;
 
 import java.util.List;
 
-public abstract class AbstractMarketOrderList implements MarketOrderList {
+public abstract class AbstractMarketOrderList implements Buildable, MutableMarketOrders, UniqueFirstMarketOrder {
 
-    List<MarketOrder> marketOrderList;
+    List<AbstractMarketOrder> marketOrderList;
     AbstractTradeData data;
-    AbstractTradeCalculations calculations;
+    GeometricScalingTradeCalculations calculations;
 
     public AbstractMarketOrderList(AbstractTradeData data) {
         this.data = data;

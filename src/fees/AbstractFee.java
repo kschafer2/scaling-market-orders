@@ -2,14 +2,15 @@ package fees;
 
 public abstract class AbstractFee implements Fee {
 
-    private double value;
+    private double fee;
 
-    AbstractFee(double value) {
-        this.value = value;
+    AbstractFee(double fee) {
+        this.fee = fee;
     }
 
     @Override
-    public double getValue() {
-        return value;
+    public double getFee() {
+        return fee;
     }
+
 }

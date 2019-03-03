@@ -1,21 +1,19 @@
 package calculations;
 
-import data.ScalingTradeData;
+import data.GeometricScalingTradeData;
 import data.TradeType;
 
-public class ScalingTradeCalculations extends AbstractTradeCalculations {
+public class GeometricScalingTradeCalculations extends AbstractGeometricScalingTradeCalculations
+        implements FirstMarketOrderCalculations, NextMarketOrderCalculations {
 
-    ScalingTradeData data;
-
-    public ScalingTradeCalculations(ScalingTradeData data) {
+    public GeometricScalingTradeCalculations(GeometricScalingTradeData data) {
         super(data);
-        this.data = data;
     }
 
     @Override
     public double calculateFirstMarketOrderVolume() {
-        return (data.getTradeVolume() * (1 - data.getScalingRatio())) /
-                (1 - Math.pow(data.getScalingRatio(), data.getNumberOfMarketOrders()));
+        return (data.getTradeVolume() * (1 - data.getScale())) /
+                (1 - Math.pow(data.getScale(), data.getNumberOfMarketOrders()));
     }
 
     @Override
@@ -29,7 +27,7 @@ public class ScalingTradeCalculations extends AbstractTradeCalculations {
 
     @Override
     public double calculateNextMarketOrderVolume(double previousVolume) {
-        return previousVolume * data.getScalingRatio();
+        return previousVolume * data.getScale();
     }
 
     @Override
