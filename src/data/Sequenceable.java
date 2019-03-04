@@ -1,4 +1,4 @@
-package trades;
+package data;
 
 public interface Sequenceable {
 
