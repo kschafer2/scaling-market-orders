@@ -1,6 +1,6 @@
 package lists;
 
-import orders.MarketOrderImpl;
+import orders.GenericMarketOrder;
 
 import java.text.DecimalFormat;
 
@@ -11,7 +11,7 @@ public class MarketOrderListOriginal {
     private int numberOfMarketOrders;
     private int marketOrderType;
 
-    private MarketOrderImpl[] marketOrders;
+    private GenericMarketOrder[] marketOrders;
 
     private double totalTradeCapital;
     private double scalingRatio;
@@ -26,7 +26,7 @@ public class MarketOrderListOriginal {
         this.marketOrderType = marketOrderType;
         this.numberOfMarketOrders = numberOfMarketOrders;
 
-        this.marketOrders = new MarketOrderImpl[numberOfMarketOrders];
+        this.marketOrders = new GenericMarketOrder[numberOfMarketOrders];
 
         if(this.marketOrderType == SELL)
             this.feePercentage = 0;
@@ -75,7 +75,7 @@ public class MarketOrderListOriginal {
         else
             firstMarketOrderPrice = minMarketOrderPrice;
 
-        MarketOrderImpl firstMarketOrder = new MarketOrderImpl(firstMarketOrderPrice, getFirstOrderCapital());
+        GenericMarketOrder firstMarketOrder = new GenericMarketOrder(firstMarketOrderPrice, getFirstOrderCapital());
 
         marketOrders[0] = firstMarketOrder;
     }
@@ -86,7 +86,7 @@ public class MarketOrderListOriginal {
         if(marketOrderType == BUY)
             priceInterval /= -1;
 
-        MarketOrderImpl thisMarketOrder = new MarketOrderImpl(getPreviousMarketOrder(currentIndex).getAssetPrice()
+        GenericMarketOrder thisMarketOrder = new GenericMarketOrder(getPreviousMarketOrder(currentIndex).getAssetPrice()
                 + priceInterval, getPreviousMarketOrder(currentIndex).getTradeVolume() * scalingRatio);
 
         marketOrders[currentIndex] = thisMarketOrder;
@@ -97,7 +97,7 @@ public class MarketOrderListOriginal {
         return (maxMarketOrderPrice-minMarketOrderPrice)/(numberOfMarketOrders - 1);
     }
 
-     MarketOrderImpl getPreviousMarketOrder(int currentIndex) {
+     GenericMarketOrder getPreviousMarketOrder(int currentIndex) {
          return marketOrders[currentIndex - 1];
      }
 
@@ -112,7 +112,7 @@ public class MarketOrderListOriginal {
     public void printList() {
         DecimalFormat numberFormat = new DecimalFormat("#.00");
 
-        for (MarketOrderImpl marketOrder : marketOrders) {
+        for (GenericMarketOrder marketOrder : marketOrders) {
             System.out.println(numberFormat.format(marketOrder.getAssetPrice()) + "\t"
                     + marketOrder.getTradeVolume());
         }
@@ -123,7 +123,7 @@ public class MarketOrderListOriginal {
         double sum = 0;
 
 
-        for (MarketOrderImpl marketOrder : marketOrders) {
+        for (GenericMarketOrder marketOrder : marketOrders) {
             sumProduct += (marketOrder.getAssetPrice() * marketOrder.getTradeVolume());
             sum += marketOrder.getTradeVolume();
         }

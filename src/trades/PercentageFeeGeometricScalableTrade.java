@@ -3,7 +3,7 @@ package trades;
 import data.GeometricScalingTradeData;
 import fees.PercentageFee;
 import orders.FeeMarketOrder;
-import orders.MarketOrderImpl;
+import orders.GenericMarketOrder;
 
 public class PercentageFeeGeometricScalableTrade extends AbstractGeometricScalableTrade {
 
@@ -27,7 +27,7 @@ public class PercentageFeeGeometricScalableTrade extends AbstractGeometricScalab
     public void addMarketOrder(int index) {
         double price = calculations.calculateNextMarketOrderPrice(marketOrderList.get(index - 1).getAssetPrice());
         double volume = calculations.calculateNextMarketOrderVolume(marketOrderList.get(index - 1).getTradeVolume());
-        marketOrderList.add(new MarketOrderImpl(price, volume));
+        marketOrderList.add(new GenericMarketOrder(price, volume));
     }
 
     @Override

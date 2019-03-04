@@ -1,4 +1,5 @@
 import Presentation.TradePresentation;
+import Presentation.TwoDecimalTradePresentation;
 import data.GeometricScalingTradeData;
 import data.TradeType;
 import fees.PercentageFee;
@@ -12,7 +13,7 @@ public class TradeApplication {
         GeometricScalingTradeData data = new GeometricScalingTradeData(TradeType.BUY, 5000,
                 1.2, 20, 1000, 10000);
         PercentageFeeGeometricScalableTrade trade = new PercentageFeeGeometricScalableTrade(data, fee);
-        TradePresentation presentation = new TradePresentation(trade.getMarketOrderList());
+        TradePresentation presentation = new TwoDecimalTradePresentation(trade.getMarketOrderList());
         presentation.print();
     }
 }

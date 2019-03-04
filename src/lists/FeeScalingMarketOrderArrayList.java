@@ -4,7 +4,7 @@ import calculations.GeometricScalingTradeCalculations;
 import data.GeometricScalingTradeData;
 import fees.AbstractFee;
 import orders.FeeMarketOrder;
-import orders.MarketOrderImpl;
+import orders.GenericMarketOrder;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class FeeScalingMarketOrderArrayList extends AbstractMarketOrderList {
     public void addMarketOrder(int index) {
         double price = calculations.calculateNextMarketOrderPrice(marketOrderList.get(index - 1).getAssetPrice());
         double volume = calculations.calculateNextMarketOrderVolume(marketOrderList.get(index - 1).getTradeVolume());
-        marketOrderList.add(new MarketOrderImpl(price, volume));
+        marketOrderList.add(new GenericMarketOrder(price, volume));
     }
 
     @Override
