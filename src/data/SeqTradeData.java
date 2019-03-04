@@ -1,6 +1,7 @@
 package data;
 
-public interface SeqTradeData extends TradeData, Sequenceable {
+public interface SeqTradeData extends TradeData {
 
+    double getDifferenceBetween();
 }
 

@@ -1,6 +1,6 @@
 package data;
 
-public class SequenceTradeData extends GenericTradeData implements Sequenceable {
+public class SequenceTradeData extends GenericTradeData implements SeqTradeData {
 
     private double differenceBetween;
 
