@@ -1,15 +1,15 @@
 package trades;
 
-import data.GeometricScalingTradeData;
+import data.SequenceTradeData;
 import fees.PercentageFee;
 import orders.FeeMarketOrder;
 import orders.GenericMarketOrder;
 
-public class PercentageFeeGeometricScalableTrade extends AbstractGeometricScalableTrade {
+public class PercentageFeeGeometricSequenceTrade extends AbstractGeometricSequenceTrade {
 
     private PercentageFee fee;
 
-    public PercentageFeeGeometricScalableTrade(GeometricScalingTradeData data, PercentageFee fee) {
+    public PercentageFeeGeometricSequenceTrade(SequenceTradeData data, PercentageFee fee) {
         super(data);
         this.fee = fee;
         build();

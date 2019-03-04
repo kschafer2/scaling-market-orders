@@ -1,13 +1,13 @@
 package Presentation;
 
-import orders.AbstractMarketOrder;
+import orders.GenericMarketOrder;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
 public class TwoDecimalTradePresentation extends TradePresentation {
 
-    public TwoDecimalTradePresentation(List<AbstractMarketOrder> marketOrderList) {
+    public TwoDecimalTradePresentation(List<GenericMarketOrder> marketOrderList) {
         super(marketOrderList);
 
     }
@@ -16,8 +16,8 @@ public class TwoDecimalTradePresentation extends TradePresentation {
     public void print() {
         DecimalFormat numberFormat = new DecimalFormat("#.00");
 
-        for(int i =0; i < marketOrderList.size(); i++) {
-            AbstractMarketOrder marketOrder = (AbstractMarketOrder) marketOrderList.get(i);
+        for (Object order : marketOrderList) {
+            GenericMarketOrder marketOrder = (GenericMarketOrder) order;
 
             System.out.println(numberFormat.format(marketOrder.getAssetPrice()) + "\t\t" +
                     numberFormat.format(marketOrder.getTradeVolume()));

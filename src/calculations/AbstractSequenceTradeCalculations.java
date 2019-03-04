@@ -1,20 +1,20 @@
 package calculations;
 
-import data.GeometricScalingTradeData;
+import data.SequenceTradeData;
 
-public abstract class AbstractGeometricScalingTradeCalculations implements TradeCalculations {
+public abstract class AbstractSequenceTradeCalculations implements TradeCalculations {
 
-    GeometricScalingTradeData data;
+    SequenceTradeData data;
 
-    AbstractGeometricScalingTradeCalculations(GeometricScalingTradeData data) {
+    AbstractSequenceTradeCalculations(SequenceTradeData data) {
         this.data = data;
     }
 
-    public GeometricScalingTradeData getData() {
+    public SequenceTradeData getData() {
         return data;
     }
 
-    public void setData(GeometricScalingTradeData data) {
+    public void setData(SequenceTradeData data) {
         this.data = data;
     }
 

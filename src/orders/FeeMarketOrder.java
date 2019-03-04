@@ -2,7 +2,7 @@ package orders;
 
 import fees.AbstractFee;
 
-public class FeeMarketOrder extends AbstractMarketOrder {
+public class FeeMarketOrder extends GenericMarketOrder {
 
     private AbstractFee fee;
 
@@ -13,7 +13,7 @@ public class FeeMarketOrder extends AbstractMarketOrder {
         applyFee();
     }
 
-    public void applyFee() {
+    private void applyFee() {
         setTradeVolume(getTradeVolume()/(1 + fee.calculateFee()));
     }
 }

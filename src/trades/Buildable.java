@@ -1,4 +1,4 @@
-package buildable;
+package trades;
 
 public interface Buildable {
 
