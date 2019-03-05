@@ -1,12 +1,12 @@
 package calculations;
 
-import data.SequenceTradeData;
+import data.SeqTradeData;
 import data.TradeType;
 
 public class GeometricSequenceTradeCalculations extends AbstractSequenceTradeCalculations
-        implements FirstMarketOrderCalculations, NextMarketOrderCalculations {
+        implements FirstMarketOrderDependentCalculations {
 
-    public GeometricSequenceTradeCalculations(SequenceTradeData data) {
+    public GeometricSequenceTradeCalculations(SeqTradeData data) {
         super(data);
     }
 

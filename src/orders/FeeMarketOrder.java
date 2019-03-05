@@ -1,12 +1,12 @@
 package orders;
 
-import fees.AbstractFee;
+import fees.Fee;
 
 public class FeeMarketOrder extends GenericMarketOrder {
 
-    private AbstractFee fee;
+    private Fee fee;
 
-    public FeeMarketOrder(double assetPrice, double tradeVolume, AbstractFee fee) {
+    public FeeMarketOrder(double assetPrice, double tradeVolume, Fee fee) {
         super(assetPrice, tradeVolume);
         this.fee = fee;
 

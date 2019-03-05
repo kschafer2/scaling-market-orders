@@ -1,8 +1,6 @@
 package data;
 
-import trades.Sequenceable;
-
-public class SequenceTradeData extends GenericTradeData implements Sequenceable {
+public class SequenceTradeData extends GenericTradeData implements SeqTradeData {
 
     private double differenceBetween;
 
@@ -13,6 +11,7 @@ public class SequenceTradeData extends GenericTradeData implements Sequenceable 
         this.differenceBetween = differenceBetween;
     }
 
+    @Override
     public double getDifferenceBetween() {
         return differenceBetween;
     }

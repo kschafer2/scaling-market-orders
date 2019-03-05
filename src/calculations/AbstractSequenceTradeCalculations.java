@@ -1,20 +1,23 @@
 package calculations;
 
-import data.SequenceTradeData;
+import data.SeqTradeData;
 
-public abstract class AbstractSequenceTradeCalculations implements TradeCalculations {
 
-    SequenceTradeData data;
+public abstract class AbstractSequenceTradeCalculations implements SeqTradeCalculations {
 
-    AbstractSequenceTradeCalculations(SequenceTradeData data) {
+    SeqTradeData data;
+
+    AbstractSequenceTradeCalculations(SeqTradeData data) {
         this.data = data;
     }
 
-    public SequenceTradeData getData() {
+    @Override
+    public SeqTradeData getData() {
         return data;
     }
 
-    public void setData(SequenceTradeData data) {
+    @Override
+    public void setData(SeqTradeData data) {
         this.data = data;
     }
 

@@ -1,6 +1,6 @@
 package Presentation;
 
-import orders.GenericMarketOrder;
+import orders.MarketOrder;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class TradePresentation implements Printable, WeightedAverage {
 
     List marketOrderList;
 
-    public TradePresentation(List<GenericMarketOrder> marketOrderList) {
+    public TradePresentation(List<MarketOrder> marketOrderList) {
 
         this.marketOrderList = marketOrderList;
     }
@@ -16,7 +16,7 @@ public class TradePresentation implements Printable, WeightedAverage {
     @Override
     public void print() {
         for (Object order : marketOrderList) {
-            GenericMarketOrder marketOrder = (GenericMarketOrder) order;
+            MarketOrder marketOrder = (MarketOrder) order;
 
             System.out.println(marketOrder.getAssetPrice() + "\t" + marketOrder.getTradeVolume());
         }
@@ -32,7 +32,7 @@ public class TradePresentation implements Printable, WeightedAverage {
 
 
         for (Object order : marketOrderList) {
-            GenericMarketOrder marketOrder = (GenericMarketOrder) order;
+            MarketOrder marketOrder = (MarketOrder) order;
 
             sumProduct += (marketOrder.getAssetPrice() * marketOrder.getTradeVolume());
             sum += marketOrder.getTradeVolume();
