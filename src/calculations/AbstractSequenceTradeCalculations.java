@@ -3,7 +3,7 @@ package calculations;
 import data.SeqTradeData;
 
 
-public abstract class AbstractSequenceTradeCalculations implements TradeCalculations {
+public abstract class AbstractSequenceTradeCalculations implements SeqTradeCalculations {
 
     SeqTradeData data;
 
@@ -11,10 +11,12 @@ public abstract class AbstractSequenceTradeCalculations implements TradeCalculat
         this.data = data;
     }
 
+    @Override
     public SeqTradeData getData() {
         return data;
     }
 
+    @Override
     public void setData(SeqTradeData data) {
         this.data = data;
     }

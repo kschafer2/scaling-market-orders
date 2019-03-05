@@ -1,23 +1,24 @@
 package trades;
 
 import calculations.GeometricSequenceTradeCalculations;
-import data.SequenceTradeData;
-import orders.GenericMarketOrder;
+import calculations.SeqTradeCalculations;
+import data.SeqTradeData;
+import orders.MarketOrder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractGeometricSequenceTrade implements Buildable, UniqueFirstMarketOrder, MutableMarketOrders {
 
-    List<GenericMarketOrder> marketOrderList;
-    GeometricSequenceTradeCalculations calculations;
+    List<MarketOrder> marketOrderList;
+    SeqTradeCalculations calculations;
 
-    public AbstractGeometricSequenceTrade(SequenceTradeData data) {
+    public AbstractGeometricSequenceTrade(SeqTradeData data) {
         calculations = new GeometricSequenceTradeCalculations(data);
         marketOrderList = new ArrayList<>();
     }
 
-    public List<GenericMarketOrder> getMarketOrderList() {
+    public List<MarketOrder> getMarketOrderList() {
         return marketOrderList;
     }
 }

@@ -4,7 +4,7 @@ import data.SeqTradeData;
 import data.TradeType;
 
 public class GeometricSequenceTradeCalculations extends AbstractSequenceTradeCalculations
-        implements FirstMarketOrderCalculations, NextMarketOrderCalculations {
+        implements FirstMarketOrderDependentCalculations {
 
     public GeometricSequenceTradeCalculations(SeqTradeData data) {
         super(data);
