@@ -3,7 +3,7 @@ package calculations;
 import data.SeqTradeData;
 
 
-public abstract class AbstractSequenceTradeCalculations implements SeqTradeCalculations {
+public abstract class AbstractSequenceTradeCalculations implements FirstMarketOrderDependentCalculations, TradeCalculations<SeqTradeData> {
 
     SeqTradeData data;
 
