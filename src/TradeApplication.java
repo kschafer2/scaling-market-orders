@@ -5,7 +5,7 @@ import data.SequenceTradeData;
 import data.TradeType;
 import fees.Fee;
 import fees.PercentageFee;
-import trades.AbstractSequenceTrade;
+import trades.AbstractTrade;
 import trades.PercentageFeeGeometricSequenceTrade;
 
 public class TradeApplication {
@@ -17,7 +17,7 @@ public class TradeApplication {
 
         Fee fee = new PercentageFee(1);
 
-        AbstractSequenceTrade trade = new PercentageFeeGeometricSequenceTrade(data, fee);
+        AbstractTrade trade = new PercentageFeeGeometricSequenceTrade(data, fee);
 
         TradePresentation presentation = new TwoDecimalTradePresentation(trade.getMarketOrderList());
 

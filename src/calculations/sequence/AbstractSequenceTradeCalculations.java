@@ -1,5 +1,7 @@
-package calculations;
+package calculations.sequence;
 
+import calculations.FirstMarketOrderDependentCalculations;
+import calculations.TradeCalculations;
 import data.SeqTradeData;
 
 

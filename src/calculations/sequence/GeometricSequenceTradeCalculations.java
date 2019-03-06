@@ -1,4 +1,4 @@
-package calculations;
+package calculations.sequence;
 
 import data.SeqTradeData;
 import data.TradeType;
