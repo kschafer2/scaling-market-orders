@@ -1,29 +1,23 @@
 import Presentation.TradePresentation;
 import Presentation.TwoDecimalTradePresentation;
-import calculations.GeometricSequenceTradeCalculations;
-import calculations.SeqTradeCalculations;
+import data.SeqTradeData;
 import data.SequenceTradeData;
 import data.TradeType;
+import fees.Fee;
 import fees.PercentageFee;
-import orders.MarketOrder;
+import trades.AbstractTrade;
 import trades.PercentageFeeGeometricSequenceTrade;
-
-import java.util.ArrayList;
 
 public class TradeApplication {
 
     public static void main(String[] args) {
 
-        PercentageFee fee = new PercentageFee(1);
-
-        SequenceTradeData data = new SequenceTradeData(TradeType.BUY, 5000,
+        SeqTradeData data = new SequenceTradeData(TradeType.BUY, 5000,
                 1.2, 20, 1000, 10000);
 
-        SeqTradeCalculations calculations = new GeometricSequenceTradeCalculations(data);
+        Fee fee = new PercentageFee(1);
 
-        ArrayList<MarketOrder> marketOrdersList = new ArrayList<MarketOrder>();
-
-        PercentageFeeGeometricSequenceTrade trade = new PercentageFeeGeometricSequenceTrade(marketOrdersList, calculations, fee);
+        AbstractTrade trade = new PercentageFeeGeometricSequenceTrade(data, fee);
 
         TradePresentation presentation = new TwoDecimalTradePresentation(trade.getMarketOrderList());
 

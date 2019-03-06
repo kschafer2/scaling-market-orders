@@ -1,21 +1,22 @@
 package trades;
 
-import calculations.SeqTradeCalculations;
+import calculations.sequence.AbstractSequenceTradeCalculations;
+import calculations.sequence.GeometricSequenceTradeCalculations;
+import data.SeqTradeData;
 import fees.Fee;
 import orders.FeeMarketOrder;
 import orders.GenericMarketOrder;
-import orders.MarketOrder;
 
 import java.util.ArrayList;
 
-public class PercentageFeeGeometricSequenceTrade extends AbstractGeometricSequenceTrade {
+public class PercentageFeeGeometricSequenceTrade extends AbstractTrade<AbstractSequenceTradeCalculations>
+        implements Buildable, FirstOrderDependent {
 
     private Fee fee;
 
-    public PercentageFeeGeometricSequenceTrade(ArrayList<MarketOrder> marketOrderList,
-                                               SeqTradeCalculations calculations, Fee fee) {
-
-        super(marketOrderList, calculations);
+    public PercentageFeeGeometricSequenceTrade(SeqTradeData data, Fee fee) {
+        super.calculations = new GeometricSequenceTradeCalculations(data);
+        super.marketOrderList = new ArrayList<>();
         this.fee = fee;
         build();
     }

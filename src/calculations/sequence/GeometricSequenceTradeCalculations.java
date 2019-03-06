@@ -1,10 +1,9 @@
-package calculations;
+package calculations.sequence;
 
 import data.SeqTradeData;
 import data.TradeType;
 
-public class GeometricSequenceTradeCalculations extends AbstractSequenceTradeCalculations
-        implements FirstMarketOrderDependentCalculations {
+public class GeometricSequenceTradeCalculations extends AbstractSequenceTradeCalculations {
 
     public GeometricSequenceTradeCalculations(SeqTradeData data) {
         super(data);
