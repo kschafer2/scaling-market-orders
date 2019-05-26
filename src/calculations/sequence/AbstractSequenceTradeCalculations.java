@@ -7,7 +7,7 @@ import data.SeqTradeData;
 
 public abstract class AbstractSequenceTradeCalculations implements FirstMarketOrderDependentCalculations, TradeCalculations<SeqTradeData> {
 
-    SeqTradeData data;
+    protected SeqTradeData data;
 
     AbstractSequenceTradeCalculations(SeqTradeData data) {
         this.data = data;

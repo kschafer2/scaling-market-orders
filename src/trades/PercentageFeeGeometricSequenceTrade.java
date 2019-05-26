@@ -15,8 +15,8 @@ public class PercentageFeeGeometricSequenceTrade extends AbstractTrade<AbstractS
     private Fee fee;
 
     public PercentageFeeGeometricSequenceTrade(SeqTradeData data, Fee fee) {
-        super.calculations = new GeometricSequenceTradeCalculations(data);
-        super.marketOrderList = new ArrayList<>();
+        setCalculations(new GeometricSequenceTradeCalculations(data));
+        setMarketOrderList(new ArrayList<>());
         this.fee = fee;
         build();
     }
@@ -24,22 +24,22 @@ public class PercentageFeeGeometricSequenceTrade extends AbstractTrade<AbstractS
     @Override
     public void build() {
         addFirstMarketOrder();
-        for (int i = 1; i < calculations.getData().getNumberOfMarketOrders(); i++) {
+        for (int i = 1; i < getCalculations().getData().getNumberOfMarketOrders(); i++) {
             addMarketOrder(i);
         }
     }
 
     @Override
     public void addMarketOrder(int index) {
-        double price = calculations.calculateNextMarketOrderPrice(marketOrderList.get(index - 1).getAssetPrice());
-        double volume = calculations.calculateNextMarketOrderVolume(marketOrderList.get(index - 1).getTradeVolume());
-        marketOrderList.add(new GenericMarketOrder(price, volume));
+        double price = getCalculations().calculateNextMarketOrderPrice(getMarketOrderList().get(index - 1).getAssetPrice());
+        double volume = getCalculations().calculateNextMarketOrderVolume(getMarketOrderList().get(index - 1).getTradeVolume());
+        getMarketOrderList().add(new GenericMarketOrder(price, volume));
     }
 
     @Override
     public void addFirstMarketOrder() {
-        marketOrderList.add(new FeeMarketOrder(calculations.calculateFirstMarketOrderPrice(),
-                calculations.calculateFirstMarketOrderVolume(), fee));
+        getMarketOrderList().add(new FeeMarketOrder(getCalculations().calculateFirstMarketOrderPrice(),
+                getCalculations().calculateFirstMarketOrderVolume(), fee));
     }
 }
 
