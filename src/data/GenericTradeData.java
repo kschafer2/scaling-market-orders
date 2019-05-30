@@ -18,14 +18,13 @@ public class GenericTradeData implements TradeData {
         this.maxMarketOrderPrice = maxMarketOrderPrice;
     }
 
-    @Override
-    public TradeType getTradeType() {
-        return tradeType;
+    public void setTradeType(TradeType tradeType) {
+        this.tradeType = tradeType;
     }
 
     @Override
-    public double getTradeVolume() {
-        return tradeVolume;
+    public TradeType getTradeType() {
+        return tradeType;
     }
 
     @Override
@@ -34,12 +33,37 @@ public class GenericTradeData implements TradeData {
     }
 
     @Override
+    public void setNumberOfMarketOrders(int numberOfMarketOrders) {
+        this.numberOfMarketOrders = numberOfMarketOrders;
+    }
+
+    @Override
+    public double getTradeVolume() {
+        return tradeVolume;
+    }
+
+    @Override
+    public void setTradeVolume(double tradeVolume) {
+        this.tradeVolume = tradeVolume;
+    }
+
+    @Override
     public double getMinMarketOrderPrice() {
         return minMarketOrderPrice;
     }
 
     @Override
+    public void setMinMarketOrderPrice(double minMarketOrderPrice) {
+        this.minMarketOrderPrice = minMarketOrderPrice;
+    }
+
+    @Override
     public double getMaxMarketOrderPrice() {
         return maxMarketOrderPrice;
+    }
+
+    @Override
+    public void setMaxMarketOrderPrice(double maxMarketOrderPrice) {
+        this.maxMarketOrderPrice = maxMarketOrderPrice;
     }
 }

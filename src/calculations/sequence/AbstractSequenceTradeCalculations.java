@@ -1,13 +1,12 @@
 package calculations.sequence;
 
-import calculations.FirstMarketOrderDependentCalculations;
-import calculations.TradeCalculations;
+import calculations.SequenceTradeCalculations;
 import data.SeqTradeData;
 
 
-public abstract class AbstractSequenceTradeCalculations implements FirstMarketOrderDependentCalculations, TradeCalculations<SeqTradeData> {
+public abstract class AbstractSequenceTradeCalculations implements SequenceTradeCalculations {
 
-    protected SeqTradeData data;
+    private SeqTradeData data;
 
     AbstractSequenceTradeCalculations(SeqTradeData data) {
         this.data = data;

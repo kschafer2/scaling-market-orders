@@ -2,6 +2,8 @@ package data;
 
 public interface SeqTradeData extends TradeData {
 
-    double getDifferenceBetween();
+    double getFunctionCoefficient();
+
+    void setFunctionCoefficient(double functionCoefficient);
 }
 

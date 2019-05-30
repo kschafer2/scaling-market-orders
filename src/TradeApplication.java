@@ -11,10 +11,10 @@ public class TradeApplication {
 
     public static void main(String[] args) {
 
-        SeqTradeData data = new SequenceTradeData(TradeType.BUY, 505.05050505,
-                .7, 10, 8700, 9600);
+        SeqTradeData data = new SequenceTradeData(TradeType.BUY, 1250,
+                1, 5, 5367.6, 6351.66);
 
-        Fee fee = new PercentageFee(0);
+        Fee fee = new PercentageFee(1);
 
         PercentageFeeGeometricSequenceTrade trade = new PercentageFeeGeometricSequenceTrade(data, fee);
 

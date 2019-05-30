@@ -1,6 +1,8 @@
 package calculations;
 
-public interface FirstMarketOrderDependentCalculations {
+import data.SeqTradeData;
+
+public interface SequenceTradeCalculations extends TradeCalculations<SeqTradeData> {
 
     double calculateFirstMarketOrderVolume();
 

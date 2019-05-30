@@ -11,28 +11,35 @@ public class GeometricSequenceTradeCalculations extends AbstractSequenceTradeCal
 
     @Override
     public double calculateFirstMarketOrderVolume() {
-        return (data.getTradeVolume() * (1 - data.getDifferenceBetween())) /
-                (1 - Math.pow(data.getDifferenceBetween(), data.getNumberOfMarketOrders()));
+
+        //split tradeVolume evenly to each marketOrder
+        if(getData().getFunctionCoefficient() == 1) {
+            return getData().getTradeVolume()/getData().getNumberOfMarketOrders();
+        }
+
+        //derived from finite geometric series formula (Sn=a1(1-rn)1-r, r!=1)
+        return (getData().getTradeVolume() * (1 - getData().getFunctionCoefficient())) /
+                (1 - Math.pow(getData().getFunctionCoefficient(), getData().getNumberOfMarketOrders()));
     }
 
     @Override
     public double calculateFirstMarketOrderPrice() {
-        if(data.getTradeType() == TradeType.BUY)
-            return data.getMaxMarketOrderPrice();
+        if(getData().getTradeType() == TradeType.BUY)
+            return getData().getMaxMarketOrderPrice();
 
         else
-            return data.getMinMarketOrderPrice();
+            return getData().getMinMarketOrderPrice();
     }
 
     @Override
     public double calculateNextMarketOrderVolume(double previousVolume) {
-        return previousVolume * data.getDifferenceBetween();
+        return previousVolume * getData().getFunctionCoefficient();
     }
 
     @Override
     public double calculateNextMarketOrderPrice(double previousPrice) {
 
-        if(data.getTradeType() == TradeType.BUY)
+        if(getData().getTradeType() == TradeType.BUY)
             return previousPrice - calculateMarketOrderPriceInterval();
 
         else
