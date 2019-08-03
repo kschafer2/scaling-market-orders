@@ -1,5 +1,5 @@
 import data.TradeType;
-import trades.Trade2;
+import trades.Trade;
 
 public class TradeApplication {
 
@@ -13,7 +13,7 @@ public class TradeApplication {
         //    geometric trade only:                   commonRatio,
         //    optional:                               percentageFee);
 
-        Trade2 trade = Trade2.geometric(TradeType.BUY,
+        Trade trade = Trade.geometric(TradeType.BUY,
                 5,
                 1000,
                 500.2,
@@ -25,7 +25,7 @@ public class TradeApplication {
         trade.activate();
         System.out.println(trade.toString());
 
-        Trade2 trade2 = Trade2.geometric(
+        Trade trade2 = Trade.geometric(
                 TradeType.SELL,
                 10,
                 5000,

@@ -1,12 +1,35 @@
 package orders;
 
-public interface MarketOrder {
+public class MarketOrder {
 
-    double getAssetPrice();
+    private double assetPrice;
+    private double tradeVolume;
 
-    void setAssetPrice(double assetPrice);
+    public MarketOrder(double assetPrice, double tradeVolume) {
+        this.assetPrice = assetPrice;
+        this.tradeVolume = tradeVolume;
+    }
 
-    double getTradeVolume();
+    public double getAssetPrice() {
+        return assetPrice;
+    }
 
-    void setTradeVolume(double tradeVolume);
+    public void setAssetPrice(double assetPrice) {
+        this.assetPrice = assetPrice;
+    }
+
+    public double getTradeVolume() {
+        return tradeVolume;
+    }
+
+    public void setTradeVolume(double tradeVolume) {
+        this.tradeVolume = tradeVolume;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "assetPrice=" + assetPrice +
+                ", tradeVolume=" + tradeVolume;
+    }
 }

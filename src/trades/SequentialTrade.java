@@ -1,10 +1,9 @@
 package trades;
 
 import data.TradeType;
-import orders.GenericMarketOrder;
 import orders.MarketOrder;
 
-public abstract class SequentialTrade extends Trade2 {
+public abstract class SequentialTrade extends Trade {
 
     protected double minPrice;
     protected double maxPrice;
@@ -42,13 +41,13 @@ public abstract class SequentialTrade extends Trade2 {
             return;
         }
 
-        marketOrders.add(new GenericMarketOrder(
+        marketOrders.add(new MarketOrder(
                 getNextOrderPrice(getOrderPrecedingIndex(index).getAssetPrice()),
                 getNextOrderVolume(getOrderPrecedingIndex(index).getTradeVolume())));
     }
 
     private void addFirstOrder() {
-        marketOrders.add(new GenericMarketOrder(
+        marketOrders.add(new MarketOrder(
                 getFirstOrderPrice(),
                 getFirstOrderVolume()));
     }
