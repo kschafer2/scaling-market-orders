@@ -2,7 +2,7 @@ package trades;
 
 import fees.Fee;
 
-public class AbstractFeeTrade extends AbstractTrade {
+public class FeeTrade extends Trade {
 
     private Fee fee;
 
@@ -10,5 +10,5 @@ public class AbstractFeeTrade extends AbstractTrade {
         fee.calculateFee();
 
         return fee.getFee();
-    };
+    }
 }
