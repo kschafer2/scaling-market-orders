@@ -29,4 +29,11 @@ public class GenericMarketOrder implements MarketOrder {
     public void setTradeVolume(double tradeVolume) {
         this.tradeVolume = tradeVolume;
     }
+
+    @Override
+    public String toString() {
+        return
+                "assetPrice=" + assetPrice +
+                ", tradeVolume=" + tradeVolume;
+    }
 }

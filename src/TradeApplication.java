@@ -1,44 +1,52 @@
-import data.SeqTradeData;
-import data.SequenceTradeData;
 import data.TradeType;
-import fees.Fee;
-import fees.PercentageFee;
-import trades.PercentageFeeGeometricSequenceTrade;
+import trades.Trade2;
 
 public class TradeApplication {
 
     public static void main(String[] args) {
 
-        SeqTradeData data = new SequenceTradeData(TradeType.BUY, 1203.2,1,20, 5700, 7400
-                 );
-
-        Fee fee = new PercentageFee(1);
-
-        PercentageFeeGeometricSequenceTrade trade = new PercentageFeeGeometricSequenceTrade(data, fee);
-        trade.build();
-
-       // TradePresentation presentation = new TwoDecimalTradePresentation(trade.getMarketOrderList());
-
-       // presentation.print();
-
-        //Trade trade = new SequentialTrade.Geometric(type,
-        //                                            numberOfMarketOrders,
+        //Trade trade = new SequentialTrade.geometric(type,
+        //                                            totalOrders,
         //                                            tradeVolume,
-        //    sequential trade only:                  minMarketOrderPrice,
-        //    sequential trade only:                  maxMarketOrderPrice,
+        //    sequential trade only:                  minPrice,
+        //    sequential trade only:                  maxPrice,
         //    geometric trade only:                   commonRatio,
-        //    optional:                               fee);
+        //    optional:                               percentageFee);
 
-        //Trade trade = new SequentialTrade.Arithmetic(type,
-        //                                            numberOfMarketOrders,
+        Trade2 trade = Trade2.geometric(TradeType.BUY,
+                5,
+                1000,
+                500.2,
+                1555.65,
+                1.2,
+                3);
+
+        System.out.println(trade.toString());
+        trade.activate();
+        System.out.println(trade.toString());
+
+        Trade2 trade2 = Trade2.geometric(
+                TradeType.SELL,
+                10,
+                5000,
+                100,
+                1500,
+                1
+        );
+
+        trade2.activate();
+        System.out.println(trade2.toString());
+
+        //Trade trade = new SequentialTrade.arithmetic(type,
+        //                                            totalOrders,
         //                                            tradeVolume,
-        //     sequential trade only:                 minMarketOrderPrice
-        //     sequential trade only:                 maxMarketOrderPrice
+        //     sequential trade only:                 minPrice
+        //     sequential trade only:                 maxPrice
         //     arithmetic trade only:                 commonDifference);
 
         //Trade trade = new ManualTrade()
         //                      .type()
-        //                      .fee()
+        //                      .percentageFee()
         //                      .addMarketOrder(atPrice, volume)
         //                      .addMarketOrder(atPrice, volume)
         //                      .build()
