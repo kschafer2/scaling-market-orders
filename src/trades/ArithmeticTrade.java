@@ -11,9 +11,9 @@ public class ArithmeticTrade extends SequentialTrade {
     }
 
     protected ArithmeticTrade(TradeType type, int totalOrders, double tradeVolume,
-                           double minPrice, double maxPrice, double commonDifference, double fee) {
+                           double minPrice, double maxPrice, double commonDifference, double percentageFee) {
 
-        super(type, totalOrders, tradeVolume, minPrice, maxPrice, commonDifference, fee);
+        super(type, totalOrders, tradeVolume, minPrice, maxPrice, commonDifference, percentageFee);
     }
 
     @Override

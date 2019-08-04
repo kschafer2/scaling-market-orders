@@ -14,6 +14,10 @@ public abstract class Trade {
     protected double percentageFee;
     protected List<MarketOrder> marketOrders = new ArrayList<>();
 
+    protected Trade(TradeType type){
+        this.type = type;
+    }
+
     protected Trade(TradeType type, int totalOrders, double tradeVolume) {
         this.type = type;
         this.totalOrders = totalOrders;
@@ -30,12 +34,18 @@ public abstract class Trade {
         tradeVolume = tradeVolume/(1+(percentageFee/100));
     }
 
-    public void activate() {
+    public Trade activate() {
         applyFee();
-        build();
-    }
 
+        build();
+
+        return this;
+    }
     protected abstract void build();
+
+    public static ManualTrade manual(TradeType type) {
+        return new ManualTrade(type);
+    }
 
     public static Trade arithmetic(TradeType type, int totalOrders, double tradeVolume,
                                    double minPrice, double maxPrice, double commonDifference) {
@@ -44,9 +54,10 @@ public abstract class Trade {
     }
 
     public static Trade arithmetic(TradeType type, int totalOrders, double tradeVolume,
-                                   double minPrice, double maxPrice, double commonDifference, double fee) {
+                                   double minPrice, double maxPrice, double commonDifference, double percentageFee) {
 
-        return new ArithmeticTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonDifference, fee);    }
+        return new ArithmeticTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonDifference, percentageFee);
+    }
 
     public static Trade geometric(TradeType type, int totalOrders, double tradeVolume,
                                   double minPrice, double maxPrice, double commonRatio) {
@@ -55,8 +66,19 @@ public abstract class Trade {
     }
 
     public static Trade geometric(TradeType type, int totalOrders, double tradeVolume,
-                                  double minPrice, double maxPrice, double commonRatio, double fee) {
+                                  double minPrice, double maxPrice, double commonRatio, double percentageFee) {
 
-        return new GeometricTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonRatio, fee);
+        return new GeometricTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonRatio, percentageFee);
+    }
+
+    @Override
+    public String toString() {
+        return "Trade{" +
+                "type=" + type +
+                ", totalOrders=" + totalOrders +
+                ", tradeVolume=" + tradeVolume +
+                ", percentageFee=" + percentageFee +
+                ", marketOrders=" + marketOrders +
+                '}';
     }
 }

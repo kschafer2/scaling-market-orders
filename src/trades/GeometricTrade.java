@@ -11,9 +11,9 @@ public class GeometricTrade extends SequentialTrade {
     }
 
     protected GeometricTrade(TradeType type, int totalOrders, double tradeVolume,
-                     double minPrice, double maxPrice, double commonRatio, double fee) {
+                     double minPrice, double maxPrice, double commonRatio, double percentageFee) {
 
-        super(type, totalOrders, tradeVolume, minPrice, maxPrice, commonRatio, fee);
+        super(type, totalOrders, tradeVolume, minPrice, maxPrice, commonRatio, percentageFee);
     }
 
     double getFirstOrderVolume() {

@@ -19,9 +19,9 @@ public abstract class SequentialTrade extends Trade {
     }
 
     public SequentialTrade(TradeType type, int totalOrders, double tradeVolume,
-                           double minPrice, double maxPrice, double difference, double fee) {
+                           double minPrice, double maxPrice, double difference, double percentageFee) {
 
-        super(type, totalOrders, tradeVolume, fee);
+        super(type, totalOrders, tradeVolume, percentageFee);
         this.minPrice = minPrice;
         this.maxPrice = maxPrice;
         this.difference = difference;
