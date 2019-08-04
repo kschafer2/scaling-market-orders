@@ -1,6 +1,4 @@
-package trades;
-
-import data.TradeType;
+package model;
 
 public class ArithmeticTrade extends SequentialTrade {
 
@@ -18,13 +16,12 @@ public class ArithmeticTrade extends SequentialTrade {
 
     @Override
     double getFirstOrderVolume() {
-        //todo implement this
-        return 0;
+        //derived from sum of finite arithmetic series formula: Sn=(n(2a+(n-1)d))/2
+        return ((2*tradeVolume/totalOrders)-(difference*(totalOrders-1)))/2;
     }
 
     @Override
-    double getNextOrderVolume(double previousVolume) {
-        //todo implement this
-        return 0;
+    double getOrderVolume(MarketOrder marketOrder) {
+        return marketOrder.getTradeVolume()+difference;
     }
 }
