@@ -1,6 +1,4 @@
-package trades;
-
-import data.TradeType;
+package model;
 
 public class GeometricTrade extends SequentialTrade {
 
@@ -16,6 +14,7 @@ public class GeometricTrade extends SequentialTrade {
         super(type, totalOrders, tradeVolume, minPrice, maxPrice, commonRatio, percentageFee);
     }
 
+    @Override
     double getFirstOrderVolume() {
 
         //split tradeVolume evenly to each marketOrder if common ratio is 1
@@ -23,12 +22,12 @@ public class GeometricTrade extends SequentialTrade {
             return tradeVolume/totalOrders;
         }
 
-        //derived from sum of finite geometric series formula (Sn=a1(1-rn)1-r, r!=1)
-        return (tradeVolume * (1 - difference)) /
-                (1 - Math.pow(difference, totalOrders));
+        //derived from sum of finite geometric series formula: Sn=a1(1-rn)1-r, r!=1
+        return (tradeVolume*(1-difference))/(1-Math.pow(difference, totalOrders));
     }
 
-    double getNextOrderVolume(double previousVolume) {
-        return previousVolume * difference;
+    @Override
+    double getOrderVolume(MarketOrder marketOrder) {
+        return marketOrder.getTradeVolume()*difference;
     }
 }

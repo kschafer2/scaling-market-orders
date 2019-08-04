@@ -1,12 +1,10 @@
-package trades;
-
-import data.TradeType;
-import orders.MarketOrder;
+package model;
 
 import java.util.Comparator;
 
+import static model.TradeType.BUY;
+
 public class ManualTrade extends Trade {
-    //todo implement this
 
     public ManualTrade(TradeType type) {
         super(type);
@@ -14,9 +12,10 @@ public class ManualTrade extends Trade {
 
     @Override
     protected void build() {
-        Comparator<MarketOrder> comparator = Comparator.comparingDouble(MarketOrder::getAssetPrice);
+        Comparator<MarketOrder> comparator
+                = Comparator.comparingDouble(MarketOrder::getAssetPrice);
 
-        if(type == TradeType.BUY) {
+        if(type == BUY) {
             marketOrders.sort(comparator.reversed());
         } else {
             marketOrders.sort(comparator);

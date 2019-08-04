@@ -1,4 +1,4 @@
-package orders;
+package model;
 
 public class MarketOrder {
 

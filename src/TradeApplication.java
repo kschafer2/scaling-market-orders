@@ -1,8 +1,8 @@
-import orders.MarketOrder;
-import trades.Trade;
+import model.MarketOrder;
+import model.Trade;
 
-import static data.TradeType.BUY;
-import static data.TradeType.SELL;
+import static model.TradeType.BUY;
+import static model.TradeType.SELL;
 
 public class TradeApplication {
 
@@ -25,9 +25,9 @@ public class TradeApplication {
                         1.2,
                         3);
 
-//        System.out.println(trade.toString());
+//        System.out.println(trade);
 //        trade.activate();
-//        System.out.println(trade.toString());
+//        System.out.println(trade);
 
         Trade trade2 = Trade.geometric(
                             SELL,
@@ -38,7 +38,7 @@ public class TradeApplication {
                             1)
                             .activate();
 
-        //   System.out.println(trade2.toString());
+//           System.out.println(trade2);
 
         Trade trade3 = Trade.manual(BUY)
                             .addOrder(new MarketOrder(500, 1000))
@@ -53,15 +53,19 @@ public class TradeApplication {
                             .addOrder(new MarketOrder(800, 750))
                             .activate();
 
-        System.out.println(trade3);
-        System.out.println(trade4);
+//        System.out.println(trade3);
+//        System.out.println(trade4);
 
-        //Trade trade = new SequentialTrade.arithmetic(type,
-        //                                            totalOrders,
-        //                                            tradeVolume,
-        //     sequential trade only:                 minPrice
-        //     sequential trade only:                 maxPrice
-        //     arithmetic trade only:                 commonDifference);
+        Trade trade5 = Trade.arithmetic(BUY,
+                                        5,
+                                        30,
+                                        0,
+                                        100,
+                                        2,
+                                        2)
+                                        .activate();
+
+        System.out.println(trade5);
 
         //Trade trade = new ManualTrade()
         //                      .type()

@@ -1,7 +1,4 @@
-package trades;
-
-import data.TradeType;
-import orders.MarketOrder;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +13,10 @@ public abstract class Trade {
 
     protected Trade(TradeType type){
         this.type = type;
+    }
+
+    protected Trade(double percentageFee) {
+        this.percentageFee = percentageFee;
     }
 
     protected Trade(TradeType type, int totalOrders, double tradeVolume) {
@@ -36,7 +37,6 @@ public abstract class Trade {
 
     public Trade activate() {
         applyFee();
-
         build();
 
         return this;
@@ -54,7 +54,8 @@ public abstract class Trade {
     }
 
     public static Trade arithmetic(TradeType type, int totalOrders, double tradeVolume,
-                                   double minPrice, double maxPrice, double commonDifference, double percentageFee) {
+                                   double minPrice, double maxPrice, double commonDifference,
+                                   double percentageFee) {
 
         return new ArithmeticTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonDifference, percentageFee);
     }
@@ -66,7 +67,8 @@ public abstract class Trade {
     }
 
     public static Trade geometric(TradeType type, int totalOrders, double tradeVolume,
-                                  double minPrice, double maxPrice, double commonRatio, double percentageFee) {
+                                  double minPrice, double maxPrice, double commonRatio,
+                                  double percentageFee) {
 
         return new GeometricTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonRatio, percentageFee);
     }
