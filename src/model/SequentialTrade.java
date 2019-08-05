@@ -4,27 +4,26 @@ import static model.TradeType.BUY;
 
 public abstract class SequentialTrade extends Trade {
 
-    protected double minPrice;
-    protected double maxPrice;
-    protected double difference;
+    private double minOrderPrice;
+    private double maxOrderPrice;
+    double differenceBetweenOrders;
 
-    protected SequentialTrade(TradeType type, int totalOrders, double tradeVolume,
-                           double minPrice, double maxPrice, double difference) {
+    SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
+                              double maxOrderPrice, double differenceBetweenOrders) {
 
-        super(type, totalOrders, tradeVolume);
-        this.minPrice = minPrice;
-        this.maxPrice = maxPrice;
-        this.difference = difference;
+        super(type, numberOfOrders, totalVolume);
+        this.minOrderPrice = minOrderPrice;
+        this.maxOrderPrice = maxOrderPrice;
+        this.differenceBetweenOrders = differenceBetweenOrders;
     }
 
-    protected SequentialTrade(TradeType type, int totalOrders, double tradeVolume,
-                           double minPrice, double maxPrice, double difference,
-                           double percentageFee) {
+    SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
+                              double maxOrderPrice, double differenceBetweenOrders, double percentageFee) {
 
-        super(type, totalOrders, tradeVolume, percentageFee);
-        this.minPrice = minPrice;
-        this.maxPrice = maxPrice;
-        this.difference = difference;
+        super(type, numberOfOrders, totalVolume, percentageFee);
+        this.minOrderPrice = minOrderPrice;
+        this.maxOrderPrice = maxOrderPrice;
+        this.differenceBetweenOrders = differenceBetweenOrders;
     }
 
     abstract double getFirstOrderVolume();
@@ -33,7 +32,7 @@ public abstract class SequentialTrade extends Trade {
 
     @Override
     protected void build() {
-        for(int i = 0; i < totalOrders; ++i) {
+        for(int i = 0; i < numberOfOrders; ++i) {
             addOrderAtIndex(i);
         }
     }
@@ -42,12 +41,12 @@ public abstract class SequentialTrade extends Trade {
         double orderPrice;
 
         if(index == 0 && marketOrders.isEmpty()) {
-            double firstOrderPrice;
-
             if(type == BUY) {
-                orderPrice = maxPrice;
-            } else {
-                orderPrice = minPrice;
+                orderPrice = maxOrderPrice;
+            }
+
+            else {
+                orderPrice = minOrderPrice;
             }
 
             marketOrders.add(new MarketOrder(
@@ -56,12 +55,14 @@ public abstract class SequentialTrade extends Trade {
         }
 
         else if(index > 0) {
-            double priceInterval = (maxPrice-minPrice)/(totalOrders-1);
+            double priceInterval = (maxOrderPrice - minOrderPrice)/(numberOfOrders-1);
             MarketOrder previousMarketOrder = marketOrders.get(index-1);
 
             if(type == BUY) {
                 orderPrice = previousMarketOrder.getAssetPrice() - priceInterval;
-            } else {
+            }
+
+            else {
                 orderPrice = previousMarketOrder.getAssetPrice() + priceInterval;
             }
 
@@ -75,18 +76,18 @@ public abstract class SequentialTrade extends Trade {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("GeometricTrade{" + "minPrice=")
-                .append(minPrice)
-                .append(", maxPrice=")
-                .append(maxPrice)
-                .append(", difference=")
-                .append(difference)
+        stringBuilder.append("minOrderPrice=")
+                .append(minOrderPrice)
+                .append(", maxOrderPrice=")
+                .append(maxOrderPrice)
+                .append(", differenceBetweenOrders=")
+                .append(differenceBetweenOrders)
                 .append(", type=")
                 .append(type)
-                .append(", totalOrders=")
-                .append(totalOrders)
-                .append(", tradeVolume=")
-                .append(tradeVolume)
+                .append(", numberOfOrders=")
+                .append(numberOfOrders)
+                .append(", totalVolume=")
+                .append(totalVolume)
                 .append(", percentageFee=")
                 .append(percentageFee)
                 .append('}')

@@ -6,7 +6,7 @@ import static model.TradeType.BUY;
 
 public class ManualTrade extends Trade {
 
-    public ManualTrade(TradeType type) {
+    ManualTrade(TradeType type) {
         super(type);
     }
 
@@ -17,7 +17,9 @@ public class ManualTrade extends Trade {
 
         if(type == BUY) {
             marketOrders.sort(comparator.reversed());
-        } else {
+        }
+
+        else {
             marketOrders.sort(comparator);
         }
     }
@@ -25,8 +27,8 @@ public class ManualTrade extends Trade {
     public ManualTrade addOrder(MarketOrder marketOrder) {
         marketOrders.add(marketOrder);
 
-        tradeVolume+= marketOrder.getTradeVolume();
-        ++totalOrders;
+        totalVolume += marketOrder.getOrderVolume();
+        ++numberOfOrders;
 
         return this;
     }

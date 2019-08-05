@@ -3,11 +3,11 @@ package model;
 public class MarketOrder {
 
     private double assetPrice;
-    private double tradeVolume;
+    private double orderVolume;
 
-    public MarketOrder(double assetPrice, double tradeVolume) {
+    public MarketOrder(double assetPrice, double orderVolume) {
         this.assetPrice = assetPrice;
-        this.tradeVolume = tradeVolume;
+        this.orderVolume = orderVolume;
     }
 
     public double getAssetPrice() {
@@ -18,18 +18,18 @@ public class MarketOrder {
         this.assetPrice = assetPrice;
     }
 
-    public double getTradeVolume() {
-        return tradeVolume;
+    public double getOrderVolume() {
+        return orderVolume;
     }
 
-    public void setTradeVolume(double tradeVolume) {
-        this.tradeVolume = tradeVolume;
+    public void setOrderVolume(double orderVolume) {
+        this.orderVolume = orderVolume;
     }
 
     @Override
     public String toString() {
         return
                 "assetPrice=" + assetPrice +
-                ", tradeVolume=" + tradeVolume;
+                ", orderVolume=" + orderVolume;
     }
 }

@@ -5,80 +5,79 @@ import java.util.List;
 
 public abstract class Trade {
 
-    protected TradeType type;
-    protected int totalOrders;
-    protected double tradeVolume;
-    protected double percentageFee;
-    protected List<MarketOrder> marketOrders = new ArrayList<>();
+    TradeType type;
+    int numberOfOrders;
+    double totalVolume;
+    double percentageFee;
+    List<MarketOrder> marketOrders = new ArrayList<>();
 
-    protected Trade(TradeType type){
+    Trade(TradeType type){
         this.type = type;
     }
 
-    protected Trade(double percentageFee) {
-        this.percentageFee = percentageFee;
-    }
-
-    protected Trade(TradeType type, int totalOrders, double tradeVolume) {
+    Trade(TradeType type, int numberOfOrders, double totalVolume) {
         this.type = type;
-        this.totalOrders = totalOrders;
-        this.tradeVolume = tradeVolume;
+        this.numberOfOrders = numberOfOrders;
+        this.totalVolume = totalVolume;
         this.percentageFee = 0;
     }
 
-    protected Trade(TradeType type, int totalOrders, double tradeVolume, double percentageFee) {
-        this(type, totalOrders, tradeVolume);
+    Trade(TradeType type, int numberOfOrders, double totalVolume, double percentageFee) {
+        this(type, numberOfOrders, totalVolume);
         this.percentageFee = percentageFee;
     }
 
-    private void applyFee() {
-        tradeVolume = tradeVolume/(1+(percentageFee/100));
-    }
+    abstract void build();
 
     public Trade activate() {
-        applyFee();
+        if(percentageFee > 0) {
+            //apply the fee
+            totalVolume = totalVolume / (1 + (percentageFee / 100));
+        }
+
         build();
 
         return this;
     }
-    protected abstract void build();
 
     public static ManualTrade manual(TradeType type) {
         return new ManualTrade(type);
     }
 
-    public static Trade arithmetic(TradeType type, int totalOrders, double tradeVolume,
+    public static ArithmeticTrade arithmetic(TradeType type, int numberOfOrders, double totalVolume,
                                    double minPrice, double maxPrice, double commonDifference) {
 
-        return new ArithmeticTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonDifference);
+        return new ArithmeticTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference);
     }
 
-    public static Trade arithmetic(TradeType type, int totalOrders, double tradeVolume,
+    public static ArithmeticTrade arithmetic(TradeType type, int numberOfOrders, double totalVolume,
                                    double minPrice, double maxPrice, double commonDifference,
                                    double percentageFee) {
 
-        return new ArithmeticTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonDifference, percentageFee);
+        return new ArithmeticTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference,
+                                    percentageFee);
     }
 
-    public static Trade geometric(TradeType type, int totalOrders, double tradeVolume,
+    public static GeometricTrade geometric(TradeType type, int numberOfOrders, double totalVolume,
                                   double minPrice, double maxPrice, double commonRatio) {
 
-        return new GeometricTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonRatio);
+        return new GeometricTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonRatio);
     }
 
-    public static Trade geometric(TradeType type, int totalOrders, double tradeVolume,
+    public static GeometricTrade geometric(TradeType type, int numberOfOrders, double totalVolume,
                                   double minPrice, double maxPrice, double commonRatio,
                                   double percentageFee) {
 
-        return new GeometricTrade(type, totalOrders, tradeVolume, minPrice, maxPrice, commonRatio, percentageFee);
+        return new GeometricTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonRatio,
+                                    percentageFee);
     }
 
     @Override
     public String toString() {
         return "Trade{" +
                 "type=" + type +
-                ", totalOrders=" + totalOrders +
-                ", tradeVolume=" + tradeVolume +
+                ", numberOfOrders=" + numberOfOrders +
+                ", totalVolume=" + totalVolume +
                 ", percentageFee=" + percentageFee +
                 ", marketOrders=" + marketOrders +
                 '}';
