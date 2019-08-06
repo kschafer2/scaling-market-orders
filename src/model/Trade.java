@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Trade {
+public abstract class Trade extends BaseEntity {
 
     TradeType type;
     int numberOfOrders;
@@ -13,6 +13,7 @@ public abstract class Trade {
 
     abstract void build();
 
+    //todo make abstract or add fee application to build methods
     public Trade activate() {
         if(percentageFee > 0) {
             //apply the fee
@@ -23,6 +24,7 @@ public abstract class Trade {
         return this;
     }
 
+    //todo extract to TradeBuilder class
     public static ManualTrade manual(TradeType type) {
         return new ManualTrade(type);
     }
@@ -55,14 +57,23 @@ public abstract class Trade {
                                     percentageFee);
     }
 
+    String marketOrdersToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(System.lineSeparator());
+
+        marketOrders.forEach(order -> stringBuilder
+                .append(order)
+                .append(System.lineSeparator()));
+
+        return stringBuilder.toString();
+    }
+
     @Override
     public String toString() {
-        return "Trade{" +
-                "type=" + type +
+        return "id=" + id +
+                ", type=" + type +
                 ", numberOfOrders=" + numberOfOrders +
                 ", totalVolume=" + totalVolume +
-                ", percentageFee=" + percentageFee +
-                ", marketOrders=" + marketOrders +
-                '}';
+                ", percentageFee=" + percentageFee;
     }
 }

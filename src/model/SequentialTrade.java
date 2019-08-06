@@ -73,29 +73,12 @@ public abstract class SequentialTrade extends Trade {
 
     @Override
     public String toString() {
-        StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("minOrderPrice=")
-                .append(minOrderPrice)
-                .append(", maxOrderPrice=")
-                .append(maxOrderPrice)
-                .append(", differenceBetweenOrders=")
-                .append(differenceBetweenOrders)
-                .append(", type=")
-                .append(type)
-                .append(", numberOfOrders=")
-                .append(numberOfOrders)
-                .append(", totalVolume=")
-                .append(totalVolume)
-                .append(", percentageFee=")
-                .append(percentageFee)
-                .append('}')
-                .append(System.lineSeparator());
-
-        for(MarketOrder order : marketOrders) {
-            stringBuilder.append(order).append(System.lineSeparator());
-        }
-
-        return stringBuilder.toString();
+        return super.toString() +
+                ", minOrderPrice=" + minOrderPrice +
+                ", maxOrderPrice=" + maxOrderPrice +
+                ", differenceBetweenOrders=" + differenceBetweenOrders +
+                "}" +
+                marketOrdersToString();
     }
 }

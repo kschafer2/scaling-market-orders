@@ -56,11 +56,20 @@ public class ManualTrade extends Trade {
 
         return this;
     }
-    public void updateTrade() {
+
+    private void updateTrade() {
         this.numberOfOrders = marketOrders.size();
 
          this.totalVolume = marketOrders.stream()
                                         .mapToDouble(MarketOrder::getOrderVolume)
                                         .sum();
+    }
+
+    @Override
+    public String toString() {
+        return "ManualTrade{" +
+                super.toString() +
+                "}" +
+                marketOrdersToString();
     }
 }

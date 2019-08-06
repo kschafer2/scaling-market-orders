@@ -1,6 +1,6 @@
 package model;
 
-public class MarketOrder {
+public class MarketOrder extends BaseEntity{
 
     private double assetPrice;
     private double orderVolume;
@@ -28,8 +28,10 @@ public class MarketOrder {
 
     @Override
     public String toString() {
-        return
-                "assetPrice=" + assetPrice +
-                ", orderVolume=" + orderVolume;
+        return "MarketOrder{" +
+                "id=" + id +
+                ", assetPrice=" + assetPrice +
+                ", orderVolume=" + orderVolume +
+                '}';
     }
 }
