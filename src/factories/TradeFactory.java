@@ -22,7 +22,7 @@ public class TradeFactory {
                                              double percentageFee) {
 
         return new ArithmeticTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference,
-                percentageFee);
+                                    percentageFee);
     }
 
     public static GeometricTrade geometric(TradeType type, int numberOfOrders, double totalVolume,
@@ -36,6 +36,6 @@ public class TradeFactory {
                                            double percentageFee) {
 
         return new GeometricTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonRatio,
-                percentageFee);
+                                    percentageFee);
     }
 }
