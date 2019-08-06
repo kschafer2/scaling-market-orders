@@ -7,7 +7,7 @@ import static model.TradeType.BUY;
 public class ManualTrade extends Trade {
 
     ManualTrade(TradeType type) {
-        super(type);
+        this.type = type;
     }
 
     @Override

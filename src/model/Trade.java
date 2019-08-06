@@ -11,30 +11,13 @@ public abstract class Trade {
     double percentageFee;
     List<MarketOrder> marketOrders = new ArrayList<>();
 
-    Trade(TradeType type){
-        this.type = type;
-    }
-
-    Trade(TradeType type, int numberOfOrders, double totalVolume) {
-        this.type = type;
-        this.numberOfOrders = numberOfOrders;
-        this.totalVolume = totalVolume;
-        this.percentageFee = 0;
-    }
-
-    Trade(TradeType type, int numberOfOrders, double totalVolume, double percentageFee) {
-        this(type, numberOfOrders, totalVolume);
-        this.percentageFee = percentageFee;
-    }
-
     abstract void build();
 
     public Trade activate() {
         if(percentageFee > 0) {
             //apply the fee
-            totalVolume = totalVolume / (1 + (percentageFee / 100));
+            totalVolume = totalVolume/(1+(percentageFee/100));
         }
-
         build();
 
         return this;

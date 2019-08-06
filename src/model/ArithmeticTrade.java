@@ -2,13 +2,13 @@ package model;
 
 public class ArithmeticTrade extends SequentialTrade {
 
-    protected ArithmeticTrade(TradeType type, int numberOfOrders, double totalVolume,
+    ArithmeticTrade(TradeType type, int numberOfOrders, double totalVolume,
                            double minPrice, double maxPrice, double commonDifference) {
 
         super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference);
     }
 
-    protected ArithmeticTrade(TradeType type, int numberOfOrders, double totalVolume,
+    ArithmeticTrade(TradeType type, int numberOfOrders, double totalVolume,
                            double minPrice, double maxPrice, double commonDifference, double percentageFee) {
 
         super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference, percentageFee);

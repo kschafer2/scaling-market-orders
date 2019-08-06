@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 
 public class GeometricTrade extends SequentialTrade {
 
-    protected GeometricTrade(TradeType type, int numberOfOrders, double totalVolume,
+    GeometricTrade(TradeType type, int numberOfOrders, double totalVolume,
                      double minPrice, double maxPrice, double commonRatio) {
 
         super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonRatio);
     }
 
-    protected GeometricTrade(TradeType type, int numberOfOrders, double totalVolume,
+    GeometricTrade(TradeType type, int numberOfOrders, double totalVolume,
                      double minPrice, double maxPrice, double commonRatio, double percentageFee) {
 
         super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonRatio, percentageFee);
