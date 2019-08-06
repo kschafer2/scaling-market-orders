@@ -7,7 +7,7 @@ import java.util.List;
 import static model.TradeType.BUY;
 import static model.TradeType.SELL;
 
-public class TradeApplication {
+public class ScalingMarketOrdersDemo {
 
     public static void main(String[] args) {
         List<Trade> trades = Arrays.asList(
