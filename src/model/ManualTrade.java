@@ -24,21 +24,43 @@ public class ManualTrade extends Trade {
         }
     }
 
-    public ManualTrade addOrder(MarketOrder marketOrder) {
-        marketOrders.add(marketOrder);
-
-        totalVolume += marketOrder.getOrderVolume();
-        ++numberOfOrders;
-
-        return this;
-    }
-
     public ManualTrade percentageFee(double percentageFee) {
         this.percentageFee = percentageFee;
 
         return this;
     }
 
+    public ManualTrade addOrder(MarketOrder marketOrder) {
+        marketOrders.add(marketOrder);
 
+        updateTrade();
 
+        return this;
+    }
+
+    public ManualTrade deleteOrder(MarketOrder marketOrder) {
+        marketOrders.remove(marketOrder);
+
+        updateTrade();
+
+        return this;
+    }
+
+    public ManualTrade deleteOrderById(Long id) {
+        marketOrders.stream()
+                    .filter(order -> order.getId().equals(id))
+                    .findFirst()
+                    .ifPresent(marketOrders::remove);
+
+        updateTrade();
+
+        return this;
+    }
+    public void updateTrade() {
+        this.numberOfOrders = marketOrders.size();
+
+         this.totalVolume = marketOrders.stream()
+                                        .mapToDouble(MarketOrder::getOrderVolume)
+                                        .sum();
+    }
 }
