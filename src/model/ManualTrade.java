@@ -6,7 +6,7 @@ import static model.TradeType.BUY;
 
 public class ManualTrade extends Trade {
 
-    ManualTrade(TradeType type) {
+    public ManualTrade(TradeType type) {
         this.type = type;
     }
 

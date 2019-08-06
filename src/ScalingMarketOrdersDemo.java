@@ -1,3 +1,4 @@
+import factories.TradeFactory;
 import model.ManualTrade;
 import model.MarketOrder;
 import model.Trade;
@@ -12,25 +13,26 @@ public class ScalingMarketOrdersDemo {
 
     public static void main(String[] args) {
         List<Trade> trades = Arrays.asList(
-                Trade.manual(BUY)
+
+                TradeFactory.manual(BUY)
                         .addOrder(new MarketOrder(500, 1000))
                         .addOrder(new MarketOrder(300, 500))
                         .addOrder(new MarketOrder(800, 750))
                         .percentageFee(2),
 
-                Trade.manual(SELL)
+                TradeFactory.manual(SELL)
                         .addOrder(new MarketOrder(500, 1000))
                         .addOrder(new MarketOrder(300, 500))
                         .addOrder(new MarketOrder(800, 750)),
 
-                Trade.arithmetic(BUY,
+                TradeFactory.arithmetic(BUY,
                         5,
                         30,
                         50,
                         100,
                         2),
 
-                Trade.arithmetic(SELL,
+                TradeFactory.arithmetic(SELL,
                         5,
                         30,
                         50,
@@ -38,7 +40,7 @@ public class ScalingMarketOrdersDemo {
                         2,
                         2),
 
-                Trade.geometric(BUY,
+                TradeFactory.geometric(BUY,
                         5,
                         1000,
                         500.2,
@@ -46,7 +48,7 @@ public class ScalingMarketOrdersDemo {
                         1.2,
                         3),
 
-                Trade.geometric(SELL,
+                TradeFactory.geometric(SELL,
                         10,
                         5000,
                         100,
@@ -67,7 +69,7 @@ public class ScalingMarketOrdersDemo {
         MarketOrder marketOrder4 = new MarketOrder(500, 500);
         MarketOrder marketOrder5 = new MarketOrder(500, 100);
 
-        ManualTrade manualTest = Trade.manual(BUY)
+        ManualTrade manualTest = TradeFactory.manual(BUY)
                 .addOrder(marketOrder)
                 .addOrder(marketOrder1)
                 .addOrder(marketOrder2)
