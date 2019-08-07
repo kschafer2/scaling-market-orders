@@ -1,9 +1,6 @@
 package factories;
 
-import model.ArithmeticTrade;
-import model.GeometricTrade;
-import model.ManualTrade;
-import model.TradeType;
+import model.*;
 
 public class TradeFactory {
 
@@ -19,10 +16,9 @@ public class TradeFactory {
 
     public static ArithmeticTrade arithmetic(TradeType type, int numberOfOrders, double totalVolume,
                                              double minPrice, double maxPrice, double commonDifference,
-                                             double percentageFee) {
+                                             Fee fee) {
 
-        return new ArithmeticTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference,
-                                    percentageFee);
+        return new ArithmeticTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference, fee);
     }
 
     public static GeometricTrade geometric(TradeType type, int numberOfOrders, double totalVolume,
@@ -33,9 +29,8 @@ public class TradeFactory {
 
     public static GeometricTrade geometric(TradeType type, int numberOfOrders, double totalVolume,
                                            double minPrice, double maxPrice, double commonRatio,
-                                           double percentageFee) {
+                                           Fee fee) {
 
-        return new GeometricTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonRatio,
-                                    percentageFee);
+        return new GeometricTrade(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonRatio, fee);
     }
 }

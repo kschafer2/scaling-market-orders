@@ -9,9 +9,9 @@ public class ArithmeticTrade extends SequentialTrade {
     }
 
     public ArithmeticTrade(TradeType type, int numberOfOrders, double totalVolume,
-                           double minPrice, double maxPrice, double commonDifference, double percentageFee) {
+                           double minPrice, double maxPrice, double commonDifference, Fee fee) {
 
-        super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference, percentageFee);
+        super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference, fee);
     }
 
     @Override

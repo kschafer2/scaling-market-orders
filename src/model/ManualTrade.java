@@ -24,8 +24,8 @@ public class ManualTrade extends Trade {
         }
     }
 
-    public ManualTrade percentageFee(double percentageFee) {
-        this.percentageFee = percentageFee;
+    public ManualTrade addFee(Fee fee) {
+        this.fee = fee;
 
         return this;
     }

@@ -19,10 +19,10 @@ public abstract class SequentialTrade extends Trade {
     }
 
     SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
-                              double maxOrderPrice, double differenceBetweenOrders, double percentageFee) {
+                              double maxOrderPrice, double differenceBetweenOrders, Fee fee) {
 
         this(type, numberOfOrders, totalVolume, minOrderPrice, maxOrderPrice, differenceBetweenOrders);
-        this.percentageFee = percentageFee;
+        this.fee = fee;
     }
 
     abstract double getFirstOrderVolume();

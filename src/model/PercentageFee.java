@@ -1,18 +1,22 @@
 package model;
 
-public class PercentageFee implements Fee {
+public class PercentageFee extends Fee {
 
-    private double value;
-    private boolean isApplied;
+    public PercentageFee(double value) {
+        this.value = value;
+    }
 
     @Override
-    public Trade applyFee(Trade trade) {
+    public void apply(Trade trade) {
         if(!isApplied) {
-            trade.totalVolume = trade.totalVolume / (1 + (trade.percentageFee / 100));
+            trade.totalVolume = trade.totalVolume / (1 + (value / 100));
 
             isApplied = true;
         }
+    }
 
-        return trade;
+    @Override
+    public void clear() {
+        isApplied = false;
     }
 }

@@ -1,6 +1,19 @@
 package model;
 
-public interface Fee {
+public abstract class Fee {
 
-    Trade applyFee(Trade trade);
+    double value;
+    boolean isApplied;
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    abstract void apply(Trade trade);
+
+    abstract void clear();
 }
