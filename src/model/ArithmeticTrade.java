@@ -1,5 +1,10 @@
 package model;
 
+import java.math.BigDecimal;
+
+import static java.math.BigDecimal.ONE;
+import static java.math.RoundingMode.HALF_DOWN;
+
 public class ArithmeticTrade extends SequentialTrade {
 
     public ArithmeticTrade(TradeType type, int numberOfOrders, double totalVolume,
@@ -15,14 +20,21 @@ public class ArithmeticTrade extends SequentialTrade {
     }
 
     @Override
-    double getFirstOrderVolume() {
+    BigDecimal getFirstOrderVolume() {
         //derived from sum of finite arithmetic series formula: Sn=(n(2a+(n-1)d))/2
-        return ((2*totalVolume/numberOfOrders)-(differenceBetweenOrders*(numberOfOrders-1)))/2;
+        BigDecimal two = new BigDecimal("2");
+        BigDecimal bigNumberOfOrders = new BigDecimal(String.valueOf(numberOfOrders));
+
+        BigDecimal minuend = two.multiply(totalVolume).divide(bigNumberOfOrders, HALF_DOWN);
+        BigDecimal subtrahend = differenceBetweenOrders.multiply(bigNumberOfOrders.subtract(ONE));
+
+        return (minuend.subtract(subtrahend))
+                .divide(two, HALF_DOWN);
     }
 
     @Override
-    double getOrderVolume(MarketOrder marketOrder) {
-        return marketOrder.getOrderVolume()+ differenceBetweenOrders;
+    BigDecimal getOrderVolume(MarketOrder marketOrder) {
+        return marketOrder.getOrderVolume().add(differenceBetweenOrders);
     }
 
     @Override

@@ -46,7 +46,7 @@ public class ScalingMarketOrdersDemo {
                         500.2,
                         1555.65,
                         1.2,
-                        new PercentageFee(3)),
+                        new PercentageFee(3.5)),
 
                 TradeFactory.geometric(SELL,
                         10,
@@ -55,6 +55,12 @@ public class ScalingMarketOrdersDemo {
                         1500,
                         1)
         );
+//
+//        ManualTrade trade1 = TradeFactory.manual(BUY)
+//                .addOrder(new MarketOrder(500, 300))
+//                .addOrder(new MarketOrder(100,100));
+//
+//        System.out.println(trade1);
 
         for(Trade trade : trades) {
             System.out.println(trade);

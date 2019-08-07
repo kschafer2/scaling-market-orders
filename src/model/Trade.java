@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public abstract class Trade extends BaseEntity {
 
     TradeType type;
     int numberOfOrders;
-    double totalVolume;
+    BigDecimal totalVolume;
     Fee fee;
     List<MarketOrder> marketOrders = new ArrayList<>();
 
@@ -16,7 +17,7 @@ public abstract class Trade extends BaseEntity {
     //todo make abstract or add fee application to build methods
     public Trade activate() {
         if (fee != null) {
-            fee.apply(this);
+            totalVolume = fee.applyTo(totalVolume);
         }
         build();
 

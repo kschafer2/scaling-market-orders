@@ -1,21 +1,24 @@
 package model;
 
+import java.math.BigDecimal;
+
+import static java.math.RoundingMode.HALF_DOWN;
 import static model.TradeType.BUY;
 
 public abstract class SequentialTrade extends Trade {
 
-    private double minOrderPrice;
-    private double maxOrderPrice;
-    double differenceBetweenOrders;
+    private BigDecimal minOrderPrice;
+    private BigDecimal maxOrderPrice;
+    BigDecimal differenceBetweenOrders;
 
     SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
                               double maxOrderPrice, double differenceBetweenOrders) {
         this.type = type;
         this.numberOfOrders = numberOfOrders;
-        this.totalVolume = totalVolume;
-        this.minOrderPrice = minOrderPrice;
-        this.maxOrderPrice = maxOrderPrice;
-        this.differenceBetweenOrders = differenceBetweenOrders;
+        this.totalVolume = new BigDecimal(String.valueOf(totalVolume));
+        this.minOrderPrice = new BigDecimal(String.valueOf(minOrderPrice));
+        this.maxOrderPrice = new BigDecimal(String.valueOf(maxOrderPrice));
+        this.differenceBetweenOrders = new BigDecimal(String.valueOf(differenceBetweenOrders));
     }
 
     SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
@@ -25,9 +28,9 @@ public abstract class SequentialTrade extends Trade {
         this.fee = fee;
     }
 
-    abstract double getFirstOrderVolume();
+    abstract BigDecimal getFirstOrderVolume();
 
-    abstract double getOrderVolume(MarketOrder previousMarketOrder);
+    abstract BigDecimal getOrderVolume(MarketOrder previousMarketOrder);
 
     @Override
     protected void build() {
@@ -37,15 +40,15 @@ public abstract class SequentialTrade extends Trade {
     }
 
     private void addOrderAtIndex(int index) {
-        double orderPrice;
+        BigDecimal orderPrice;
 
         if(index == 0 && marketOrders.isEmpty()) {
             if(type == BUY) {
-                orderPrice = maxOrderPrice;
+                orderPrice = maxOrderPrice.setScale(scale(), HALF_DOWN);
             }
 
             else {
-                orderPrice = minOrderPrice;
+                orderPrice = minOrderPrice.setScale(scale(), HALF_DOWN);
             }
 
             marketOrders.add(new MarketOrder(
@@ -54,21 +57,34 @@ public abstract class SequentialTrade extends Trade {
         }
 
         else if(index > 0) {
-            double priceInterval = (maxOrderPrice - minOrderPrice)/(numberOfOrders-1);
+//            BigDecimal priceInterval = (maxOrderPrice - minOrderPrice)/(numberOfOrders-1);
+
+            BigDecimal dividend = maxOrderPrice.subtract(minOrderPrice)
+                                        .setScale(scale(), HALF_DOWN);
+
+            BigDecimal divisor = BigDecimal.valueOf(numberOfOrders-1);
+
+            BigDecimal priceInterval = dividend.divide(divisor, HALF_DOWN)
+                                        .setScale(scale(), HALF_DOWN);
+
             MarketOrder previousMarketOrder = marketOrders.get(index-1);
 
             if(type == BUY) {
-                orderPrice = previousMarketOrder.getAssetPrice() - priceInterval;
+                orderPrice = previousMarketOrder.getAssetPrice().subtract(priceInterval);
             }
 
             else {
-                orderPrice = previousMarketOrder.getAssetPrice() + priceInterval;
+                orderPrice = previousMarketOrder.getAssetPrice().add(priceInterval);
             }
 
             marketOrders.add(new MarketOrder(
                             orderPrice,
                             getOrderVolume(previousMarketOrder)));
         }
+    }
+
+    private int scale() {
+        return Math.max(minOrderPrice.scale(), maxOrderPrice.scale())+2;
     }
 
     @Override

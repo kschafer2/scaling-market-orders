@@ -1,19 +1,21 @@
 package model;
 
+import java.math.BigDecimal;
+
 public abstract class Fee {
 
-    double value;
+    BigDecimal value;
     boolean isApplied;
 
-    public double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(double value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 
-    abstract void apply(Trade trade);
+    abstract BigDecimal applyTo(BigDecimal applyToValue);
 
     abstract void clear();
 }

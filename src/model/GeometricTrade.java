@@ -2,7 +2,13 @@ package model;
 
 import java.math.BigDecimal;
 
+import static java.math.BigDecimal.ONE;
+import static java.math.RoundingMode.HALF_DOWN;
+
 public class GeometricTrade extends SequentialTrade {
+
+    //maximum number of decimal points in desired currency
+    private final int CURRENCY_SCALE = 2;
 
     public GeometricTrade(TradeType type, int numberOfOrders, double totalVolume,
                           double minPrice, double maxPrice, double commonRatio) {
@@ -17,19 +23,27 @@ public class GeometricTrade extends SequentialTrade {
     }
 
     @Override
-    double getFirstOrderVolume() {
+    BigDecimal getFirstOrderVolume() {
+
         //split totalVolume evenly to each marketOrder if common ratio is 1
-        if(new BigDecimal(differenceBetweenOrders).compareTo(new BigDecimal(1)) == 0) {
-            return totalVolume /numberOfOrders;
+        if(differenceBetweenOrders.compareTo(ONE) == 0) {
+
+            return totalVolume.divide(new BigDecimal(String.valueOf(numberOfOrders)), HALF_DOWN)
+                    .setScale(CURRENCY_SCALE, HALF_DOWN);
         }
 
         //derived from sum of finite geometric series formula: Sn=a1(1-rn)1-r, r!=1
-        return (totalVolume *(1- differenceBetweenOrders))/(1-Math.pow(differenceBetweenOrders, numberOfOrders));
+        BigDecimal dividend = totalVolume.multiply(ONE.subtract(differenceBetweenOrders));
+        BigDecimal divisor = ONE.subtract((differenceBetweenOrders.pow(numberOfOrders)));
+
+        return dividend.divide(divisor, HALF_DOWN)
+                .setScale(CURRENCY_SCALE, HALF_DOWN);
     }
 
     @Override
-    double getOrderVolume(MarketOrder marketOrder) {
-        return marketOrder.getOrderVolume()* differenceBetweenOrders;
+    BigDecimal getOrderVolume(MarketOrder marketOrder) {
+        return marketOrder.getOrderVolume().multiply(differenceBetweenOrders)
+                .setScale(CURRENCY_SCALE, HALF_DOWN);
     }
 
     @Override
