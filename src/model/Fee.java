@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 
 public abstract class Fee {
 
-    BigDecimal value;
-    boolean isApplied;
+    protected BigDecimal value;
+    protected boolean isApplied;
 
     public BigDecimal getValue() {
         return value;
@@ -15,7 +15,14 @@ public abstract class Fee {
         this.value = value;
     }
 
+    public boolean getIsApplied() {
+        return isApplied;
+    }
+
+    public void setIsApplied(boolean value) {
+        this.isApplied = value;
+    }
+
     abstract BigDecimal applyTo(BigDecimal applyToValue);
 
-    abstract void clear();
 }

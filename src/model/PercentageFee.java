@@ -16,16 +16,10 @@ public class PercentageFee extends Fee {
             return applyToValue;
         }
 
-            isApplied = true;
-
             BigDecimal feeValueAsDecimal = value.setScale(value.scale()+2, HALF_DOWN)
                                                 .divide(BigDecimal.valueOf(100), HALF_DOWN);
 
             return applyToValue.divide(ONE.add(feeValueAsDecimal), HALF_DOWN);
     }
 
-    @Override
-    public void clear() {
-        isApplied = false;
-    }
 }

@@ -16,12 +16,27 @@ public abstract class Trade extends BaseEntity {
 
     //todo make abstract or add fee application to build methods
     public Trade activate() {
-        if (fee != null) {
-            totalVolume = fee.applyTo(totalVolume);
-        }
         build();
 
+        if (fee != null && !fee.getIsApplied()) {
+            marketOrders.forEach(order ->
+                    order.setOrderVolume(fee.applyTo(order.getOrderVolume())));
+
+            fee.setIsApplied(true);
+//            totalVolume = fee.applyTo(totalVolume);
+        }
+        updateTrade();
+
         return this;
+    }
+
+    protected void updateTrade() {
+        numberOfOrders = marketOrders.size();
+
+        totalVolume = BigDecimal.ZERO;
+        for(MarketOrder order : marketOrders) {
+            totalVolume = totalVolume.add(order.getOrderVolume());
+        }
     }
 
     String marketOrdersToString() {

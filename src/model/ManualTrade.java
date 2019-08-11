@@ -1,6 +1,5 @@
 package model;
 
-import java.math.BigDecimal;
 import java.util.Comparator;
 
 import static model.TradeType.BUY;
@@ -23,6 +22,8 @@ public class ManualTrade extends Trade {
         else {
             marketOrders.sort(comparator);
         }
+
+
     }
 
     public ManualTrade addFee(Fee fee) {
@@ -33,14 +34,14 @@ public class ManualTrade extends Trade {
 
     public ManualTrade addOrder(MarketOrder marketOrder) {
         marketOrders.add(marketOrder);
-
-        return update();
+        updateTrade();
+        return this;
     }
 
     public ManualTrade deleteOrder(MarketOrder marketOrder) {
         marketOrders.remove(marketOrder);
-
-        return update();
+        updateTrade();
+        return this;
     }
 
     public ManualTrade deleteOrderById(Long id) {
@@ -48,8 +49,8 @@ public class ManualTrade extends Trade {
                     .filter(order -> order.getId().equals(id))
                     .findFirst()
                     .ifPresent(marketOrders::remove);
-
-        return update();
+        updateTrade();
+        return this;
     }
 
     public ManualTrade deleteOrderByIndex(int index) {
@@ -57,18 +58,7 @@ public class ManualTrade extends Trade {
             return this;
         }
         marketOrders.remove(index);
-
-        return update();
-    }
-
-    private ManualTrade update() {
-        numberOfOrders = marketOrders.size();
-
-        totalVolume = BigDecimal.ZERO;
-        for(MarketOrder order : marketOrders) {
-            totalVolume = totalVolume.add(order.getOrderVolume());
-        }
-
+        updateTrade();
         return this;
     }
 
