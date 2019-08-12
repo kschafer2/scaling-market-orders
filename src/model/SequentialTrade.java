@@ -33,10 +33,15 @@ public abstract class SequentialTrade extends Trade {
     abstract BigDecimal getOrderVolume(MarketOrder previousMarketOrder);
 
     @Override
-    protected void build() {
-        for(int i = 0; i < numberOfOrders; ++i) {
-            addOrderAtIndex(i);
+    public Trade build() {
+        if(marketOrders.isEmpty()) {
+            for (int i = 0; i < numberOfOrders; ++i) {
+                addOrderAtIndex(i);
+            }
+            applyFee();
         }
+
+        return this;
     }
 
     private void addOrderAtIndex(int index) {

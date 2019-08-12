@@ -2,7 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 
-public class MarketOrder extends BaseEntity{
+public class MarketOrder extends BaseEntity {
 
     private BigDecimal assetPrice;
     private BigDecimal orderVolume;

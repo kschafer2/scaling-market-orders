@@ -11,7 +11,7 @@ public class ManualTrade extends Trade {
     }
 
     @Override
-    protected void build() {
+    public ManualTrade build() {
         Comparator<MarketOrder> comparator
                 = Comparator.comparing(MarketOrder::getAssetPrice);
 
@@ -23,7 +23,9 @@ public class ManualTrade extends Trade {
             marketOrders.sort(comparator);
         }
 
+        applyFee();
 
+        return this;
     }
 
     public ManualTrade addFee(Fee fee) {

@@ -64,7 +64,7 @@ public class ScalingMarketOrdersDemo {
 
         for(Trade trade : trades) {
             System.out.println(trade);
-            trade.activate();
+            trade.build();
             System.out.println(trade + "\n");
         }
 

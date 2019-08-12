@@ -12,22 +12,21 @@ public abstract class Trade extends BaseEntity {
     Fee fee;
     List<MarketOrder> marketOrders = new ArrayList<>();
 
-    abstract void build();
+    abstract public Trade build();
 
-    //todo make abstract or add fee application to build methods
-    public Trade activate() {
-        build();
-
+    //todo finish implementing this
+    public void applyFee() {
         if (fee != null && !fee.getIsApplied()) {
             marketOrders.forEach(order ->
                     order.setOrderVolume(fee.applyTo(order.getOrderVolume())));
 
+            // give Fee a Trade and int applicationCounter = Trade.getNumberOfOrders(),
+            // decrement applicationCounter on each fee application. Once counter == 0,
+            // set isApplied = true
             fee.setIsApplied(true);
 //            totalVolume = fee.applyTo(totalVolume);
         }
         updateTrade();
-
-        return this;
     }
 
     protected void updateTrade() {
