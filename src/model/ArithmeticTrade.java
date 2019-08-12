@@ -20,21 +20,24 @@ public class ArithmeticTrade extends SequentialTrade {
     }
 
     @Override
-    BigDecimal getFirstOrderVolume() {
-        //derived from sum of finite arithmetic series formula: Sn=(n(2a+(n-1)d))/2
-        BigDecimal two = new BigDecimal("2");
-        BigDecimal bigNumberOfOrders = new BigDecimal(String.valueOf(numberOfOrders));
+    BigDecimal getOrderVolumeAtIndex(int index) {
+        //todo handle exception better
+        if(index < 0 || index > numberOfOrders) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
 
-        BigDecimal minuend = two.multiply(totalVolume).divide(bigNumberOfOrders, HALF_DOWN);
-        BigDecimal subtrahend = differenceBetweenOrders.multiply(bigNumberOfOrders.subtract(ONE));
+        if(index == 0) {
+            BigDecimal two = new BigDecimal("2");
+            BigDecimal bigNumberOfOrders = new BigDecimal(String.valueOf(numberOfOrders));
 
-        return (minuend.subtract(subtrahend))
-                .divide(two, HALF_DOWN);
-    }
+            BigDecimal minuend = two.multiply(totalVolume).divide(bigNumberOfOrders, HALF_DOWN);
+            BigDecimal subtrahend = differenceBetweenOrders.multiply(bigNumberOfOrders.subtract(ONE));
 
-    @Override
-    BigDecimal getOrderVolume(MarketOrder marketOrder) {
-        return marketOrder.getOrderVolume().add(differenceBetweenOrders);
+            return (minuend.subtract(subtrahend))
+                    .divide(two, HALF_DOWN);
+        }
+
+        return marketOrders.get(index-1).getOrderVolume().add(differenceBetweenOrders);
     }
 
     @Override

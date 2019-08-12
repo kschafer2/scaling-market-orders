@@ -12,7 +12,7 @@ public abstract class SequentialTrade extends Trade {
     BigDecimal differenceBetweenOrders;
 
     SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
-                              double maxOrderPrice, double differenceBetweenOrders) {
+                    double maxOrderPrice, double differenceBetweenOrders) {
         this.type = type;
         this.numberOfOrders = numberOfOrders;
         this.totalVolume = new BigDecimal(String.valueOf(totalVolume));
@@ -22,19 +22,17 @@ public abstract class SequentialTrade extends Trade {
     }
 
     SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
-                              double maxOrderPrice, double differenceBetweenOrders, Fee fee) {
+                    double maxOrderPrice, double differenceBetweenOrders, Fee fee) {
 
         this(type, numberOfOrders, totalVolume, minOrderPrice, maxOrderPrice, differenceBetweenOrders);
         this.fee = fee;
     }
 
-    abstract BigDecimal getFirstOrderVolume();
-
-    abstract BigDecimal getOrderVolume(MarketOrder previousMarketOrder);
+    abstract BigDecimal getOrderVolumeAtIndex(int index);
 
     @Override
     public Trade build() {
-        if(marketOrders.isEmpty()) {
+        if (marketOrders.isEmpty()) {
             for (int i = 0; i < numberOfOrders; ++i) {
                 addOrderAtIndex(i);
             }
@@ -45,51 +43,46 @@ public abstract class SequentialTrade extends Trade {
     }
 
     private void addOrderAtIndex(int index) {
+        //todo handle exception better
+        if (index < 0 || index > numberOfOrders) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
         BigDecimal orderPrice;
 
-        if(index == 0 && marketOrders.isEmpty()) {
-            if(type == BUY) {
+        if (index == 0) {
+            if (type == BUY) {
                 orderPrice = maxOrderPrice.setScale(scale(), HALF_DOWN);
             }
 
             else {
                 orderPrice = minOrderPrice.setScale(scale(), HALF_DOWN);
             }
-
-            marketOrders.add(new MarketOrder(
-                            orderPrice,
-                            getFirstOrderVolume()));
         }
 
-        else if(index > 0) {
+        else {
 //            BigDecimal priceInterval = (maxOrderPrice - minOrderPrice)/(numberOfOrders-1);
 
-            BigDecimal dividend = maxOrderPrice.subtract(minOrderPrice)
-                                        .setScale(scale(), HALF_DOWN);
+            BigDecimal priceInterval =
+                    maxOrderPrice.subtract(minOrderPrice).setScale(scale(), HALF_DOWN)
+                    .divide(BigDecimal.valueOf(numberOfOrders - 1), HALF_DOWN)
+                    .setScale(scale(), HALF_DOWN);
 
-            BigDecimal divisor = BigDecimal.valueOf(numberOfOrders-1);
+            MarketOrder previousMarketOrder = marketOrders.get(index - 1);
 
-            BigDecimal priceInterval = dividend.divide(divisor, HALF_DOWN)
-                                        .setScale(scale(), HALF_DOWN);
-
-            MarketOrder previousMarketOrder = marketOrders.get(index-1);
-
-            if(type == BUY) {
+            if (type == BUY) {
                 orderPrice = previousMarketOrder.getAssetPrice().subtract(priceInterval);
             }
 
             else {
                 orderPrice = previousMarketOrder.getAssetPrice().add(priceInterval);
             }
-
-            marketOrders.add(new MarketOrder(
-                            orderPrice,
-                            getOrderVolume(previousMarketOrder)));
         }
+        marketOrders.add(index, new MarketOrder(orderPrice, getOrderVolumeAtIndex(index)));
     }
 
     private int scale() {
-        return Math.max(minOrderPrice.scale(), maxOrderPrice.scale())+2;
+        return Math.max(minOrderPrice.scale(), maxOrderPrice.scale()) + 2;
     }
 
     @Override

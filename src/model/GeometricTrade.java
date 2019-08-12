@@ -22,27 +22,48 @@ public class GeometricTrade extends SequentialTrade {
         super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonRatio, fee);
     }
 
-    @Override
-    BigDecimal getFirstOrderVolume() {
+//    @Override
+//    BigDecimal getFirstOrderVolume() {
 
         //split totalVolume evenly to each marketOrder if common ratio is 1
-        if(differenceBetweenOrders.compareTo(ONE) == 0) {
+//        if(differenceBetweenOrders.compareTo(ONE) == 0) {
+//
+//            return totalVolume.divide(new BigDecimal(String.valueOf(numberOfOrders)), HALF_DOWN)
+//                    .setScale(CURRENCY_SCALE, HALF_DOWN);
+//        }
+//
+//        //derived from sum of finite geometric series formula: Sn=a1(1-rn)1-r, r!=1
+//        BigDecimal dividend = totalVolume.multiply(ONE.subtract(differenceBetweenOrders));
+//        BigDecimal divisor = ONE.subtract((differenceBetweenOrders.pow(numberOfOrders)));
+//
+//        return dividend.divide(divisor, HALF_DOWN)
+//                .setScale(CURRENCY_SCALE, HALF_DOWN);
+//    }
 
-            return totalVolume.divide(new BigDecimal(String.valueOf(numberOfOrders)), HALF_DOWN)
+    @Override
+    BigDecimal getOrderVolumeAtIndex(int index) {
+        //todo handle exception better
+        if(index < 0 || index > numberOfOrders) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+
+        if(index == 0) {
+            //split totalVolume evenly to each marketOrder if common ratio is 1
+            if(differenceBetweenOrders.compareTo(ONE) == 0) {
+
+                return totalVolume.divide(new BigDecimal(String.valueOf(numberOfOrders)), HALF_DOWN)
+                        .setScale(CURRENCY_SCALE, HALF_DOWN);
+            }
+
+            //derived from sum of finite geometric series formula: Sn=a1(1-rn)1-r, r!=1
+            BigDecimal dividend = totalVolume.multiply(ONE.subtract(differenceBetweenOrders));
+            BigDecimal divisor = ONE.subtract((differenceBetweenOrders.pow(numberOfOrders)));
+
+            return dividend.divide(divisor, HALF_DOWN)
                     .setScale(CURRENCY_SCALE, HALF_DOWN);
         }
 
-        //derived from sum of finite geometric series formula: Sn=a1(1-rn)1-r, r!=1
-        BigDecimal dividend = totalVolume.multiply(ONE.subtract(differenceBetweenOrders));
-        BigDecimal divisor = ONE.subtract((differenceBetweenOrders.pow(numberOfOrders)));
-
-        return dividend.divide(divisor, HALF_DOWN)
-                .setScale(CURRENCY_SCALE, HALF_DOWN);
-    }
-
-    @Override
-    BigDecimal getOrderVolume(MarketOrder marketOrder) {
-        return marketOrder.getOrderVolume().multiply(differenceBetweenOrders)
+        return marketOrders.get(index-1).getOrderVolume().multiply(differenceBetweenOrders)
                 .setScale(CURRENCY_SCALE, HALF_DOWN);
     }
 
