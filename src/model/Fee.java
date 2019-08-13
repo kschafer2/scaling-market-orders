@@ -15,11 +15,11 @@ public abstract class Fee {
         this.value = value;
     }
 
-    public boolean getIsApplied() {
+    public boolean isApplied() {
         return isApplied;
     }
 
-    public void setIsApplied(boolean value) {
+    public void isApplied(boolean value) {
         this.isApplied = value;
     }
 

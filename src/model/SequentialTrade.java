@@ -15,10 +15,10 @@ public abstract class SequentialTrade extends Trade {
                     double maxOrderPrice, double differenceBetweenOrders) {
         this.type = type;
         this.numberOfOrders = numberOfOrders;
-        this.totalVolume = new BigDecimal(String.valueOf(totalVolume));
-        this.minOrderPrice = new BigDecimal(String.valueOf(minOrderPrice));
-        this.maxOrderPrice = new BigDecimal(String.valueOf(maxOrderPrice));
-        this.differenceBetweenOrders = new BigDecimal(String.valueOf(differenceBetweenOrders));
+        this.totalVolume = BigDecimal.valueOf(totalVolume);
+        this.minOrderPrice = BigDecimal.valueOf(minOrderPrice);
+        this.maxOrderPrice = BigDecimal.valueOf(maxOrderPrice);
+        this.differenceBetweenOrders = BigDecimal.valueOf(differenceBetweenOrders);
     }
 
     SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
@@ -54,28 +54,24 @@ public abstract class SequentialTrade extends Trade {
             if (type == BUY) {
                 orderPrice = maxOrderPrice.setScale(scale(), HALF_DOWN);
             }
-
             else {
                 orderPrice = minOrderPrice.setScale(scale(), HALF_DOWN);
             }
         }
-
         else {
-//            BigDecimal priceInterval = (maxOrderPrice - minOrderPrice)/(numberOfOrders-1);
+//          priceInterval = (maxOrderPrice - minOrderPrice)/(numberOfOrders-1);
+            BigDecimal priceInterval = maxOrderPrice.subtract(minOrderPrice)
+                                        .setScale(scale(), HALF_DOWN)
+                        .divide(BigDecimal.valueOf(numberOfOrders - 1), HALF_DOWN)
+                        .setScale(scale(), HALF_DOWN);
 
-            BigDecimal priceInterval =
-                    maxOrderPrice.subtract(minOrderPrice).setScale(scale(), HALF_DOWN)
-                    .divide(BigDecimal.valueOf(numberOfOrders - 1), HALF_DOWN)
-                    .setScale(scale(), HALF_DOWN);
-
-            MarketOrder previousMarketOrder = marketOrders.get(index - 1);
+            BigDecimal previousMarketOrderPrice = marketOrders.get(index - 1).getAssetPrice();
 
             if (type == BUY) {
-                orderPrice = previousMarketOrder.getAssetPrice().subtract(priceInterval);
+                orderPrice = previousMarketOrderPrice.subtract(priceInterval);
             }
-
             else {
-                orderPrice = previousMarketOrder.getAssetPrice().add(priceInterval);
+                orderPrice = previousMarketOrderPrice.add(priceInterval);
             }
         }
         marketOrders.add(index, new MarketOrder(orderPrice, getOrderVolumeAtIndex(index)));

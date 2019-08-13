@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Comparator;
+import java.util.Collections;
 
 import static model.TradeType.BUY;
 
@@ -12,17 +12,14 @@ public class ManualTrade extends Trade {
 
     @Override
     public ManualTrade build() {
-        Comparator<MarketOrder> comparator
-                = Comparator.comparing(MarketOrder::getAssetPrice);
-
         if(type == BUY) {
-            marketOrders.sort(comparator.reversed());
+            //greatest volume at lowest price
+            marketOrders.sort(Collections.reverseOrder(MarketOrder::compareTo));
         }
-
         else {
-            marketOrders.sort(comparator);
+            //greatest volume at highest price
+            marketOrders.sort(MarketOrder::compareTo);
         }
-
         applyFee();
 
         return this;
@@ -37,12 +34,14 @@ public class ManualTrade extends Trade {
     public ManualTrade addOrder(MarketOrder marketOrder) {
         marketOrders.add(marketOrder);
         updateTrade();
+
         return this;
     }
 
     public ManualTrade deleteOrder(MarketOrder marketOrder) {
         marketOrders.remove(marketOrder);
         updateTrade();
+
         return this;
     }
 
@@ -52,6 +51,7 @@ public class ManualTrade extends Trade {
                     .findFirst()
                     .ifPresent(marketOrders::remove);
         updateTrade();
+
         return this;
     }
 
@@ -61,6 +61,7 @@ public class ManualTrade extends Trade {
         }
         marketOrders.remove(index);
         updateTrade();
+
         return this;
     }
 

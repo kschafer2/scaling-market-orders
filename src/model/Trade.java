@@ -10,21 +10,20 @@ public abstract class Trade extends BaseEntity {
     int numberOfOrders;
     BigDecimal totalVolume;
     Fee fee;
-    List<MarketOrder> marketOrders = new ArrayList<>();
+    List<MarketOrder> marketOrders;
 
-    abstract public Trade build();
+    public abstract Trade build();
 
-    //todo finish implementing this
-    public void applyFee() {
-        if (fee != null && !fee.getIsApplied()) {
+    {
+        marketOrders = new ArrayList<>();
+    }
+
+    protected void applyFee() {
+        if (fee != null && !fee.isApplied()) {
             marketOrders.forEach(order ->
                     order.setOrderVolume(fee.applyTo(order.getOrderVolume())));
 
-            // give Fee a Trade and int applicationCounter = Trade.getNumberOfOrders(),
-            // decrement applicationCounter on each fee application. Once counter == 0,
-            // set isApplied = true
-            fee.setIsApplied(true);
-//            totalVolume = fee.applyTo(totalVolume);
+            fee.isApplied(true);
         }
         updateTrade();
     }

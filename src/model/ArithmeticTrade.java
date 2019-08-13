@@ -7,16 +7,34 @@ import static java.math.RoundingMode.HALF_DOWN;
 
 public class ArithmeticTrade extends SequentialTrade {
 
-    public ArithmeticTrade(TradeType type, int numberOfOrders, double totalVolume,
-                           double minPrice, double maxPrice, double commonDifference) {
-
-        super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference);
+    public ArithmeticTrade(TradeType type,
+                           int numberOfOrders,
+                           double totalVolume,
+                           double minPrice,
+                           double maxPrice,
+                           double commonDifference) {
+        super(type,
+              numberOfOrders,
+              totalVolume,
+              minPrice,
+              maxPrice,
+              commonDifference);
     }
 
-    public ArithmeticTrade(TradeType type, int numberOfOrders, double totalVolume,
-                           double minPrice, double maxPrice, double commonDifference, Fee fee) {
-
-        super(type, numberOfOrders, totalVolume, minPrice, maxPrice, commonDifference, fee);
+    public ArithmeticTrade(TradeType type,
+                           int numberOfOrders,
+                           double totalVolume,
+                           double minPrice,
+                           double maxPrice,
+                           double commonDifference,
+                           Fee fee) {
+        super(type,
+              numberOfOrders,
+              totalVolume,
+              minPrice,
+              maxPrice,
+              commonDifference,
+              fee);
     }
 
     @Override

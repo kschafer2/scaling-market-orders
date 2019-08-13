@@ -2,20 +2,23 @@ package model;
 
 import java.math.BigDecimal;
 
-public class MarketOrder extends BaseEntity {
+public class MarketOrder extends BaseEntity implements Comparable<MarketOrder>{
 
     private BigDecimal assetPrice;
     private BigDecimal orderVolume;
 
-    public MarketOrder(BigDecimal assetPrice, BigDecimal orderVolume) {
+    public MarketOrder(BigDecimal assetPrice,
+                       BigDecimal orderVolume) {
         this.assetPrice = assetPrice;
         this.orderVolume = orderVolume;
     }
 
-    public MarketOrder(double assetPrice, double orderVolume) {
-        this.assetPrice = new BigDecimal(String.valueOf(assetPrice));
-        this.orderVolume = new BigDecimal(String.valueOf(orderVolume));
+    public MarketOrder(double assetPrice,
+                       double orderVolume) {
+        this.assetPrice = BigDecimal.valueOf(assetPrice);
+        this.orderVolume = BigDecimal.valueOf(orderVolume);
     }
+
 
     public BigDecimal getAssetPrice() {
         return assetPrice;
@@ -31,6 +34,11 @@ public class MarketOrder extends BaseEntity {
 
     public void setOrderVolume(BigDecimal orderVolume) {
         this.orderVolume = orderVolume;
+    }
+
+    @Override
+    public int compareTo(MarketOrder other) {
+        return assetPrice.compareTo(other.assetPrice);
     }
 
     @Override
