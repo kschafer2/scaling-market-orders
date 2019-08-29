@@ -4,14 +4,14 @@ import java.util.Collections;
 
 import static model.TradeType.BUY;
 
-public class ManualTrade extends Trade {
+public class ManualTrade extends AbstractTrade {
 
     public ManualTrade(TradeType type) {
         this.type = type;
     }
 
     @Override
-    public ManualTrade build() {
+    public ManualTrade placeOrders() {
         if(type == BUY) {
             //greatest volume at lowest price
             marketOrders.sort(Collections.reverseOrder(MarketOrder::compareTo));
@@ -25,7 +25,7 @@ public class ManualTrade extends Trade {
         return this;
     }
 
-    public ManualTrade addFee(Fee fee) {
+    public ManualTrade addFee(AbstractFee fee) {
         this.fee = fee;
 
         return this;
@@ -33,14 +33,14 @@ public class ManualTrade extends Trade {
 
     public ManualTrade addOrder(MarketOrder marketOrder) {
         marketOrders.add(marketOrder);
-        updateTrade();
+        update();
 
         return this;
     }
 
     public ManualTrade deleteOrder(MarketOrder marketOrder) {
         marketOrders.remove(marketOrder);
-        updateTrade();
+        update();
 
         return this;
     }
@@ -50,7 +50,7 @@ public class ManualTrade extends Trade {
                     .filter(order -> order.getId().equals(id))
                     .findFirst()
                     .ifPresent(marketOrders::remove);
-        updateTrade();
+        update();
 
         return this;
     }
@@ -60,7 +60,7 @@ public class ManualTrade extends Trade {
             return this;
         }
         marketOrders.remove(index);
-        updateTrade();
+        update();
 
         return this;
     }

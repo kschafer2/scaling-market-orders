@@ -28,7 +28,7 @@ public class TradeFactory {
                                              double minPrice,
                                              double maxPrice,
                                              double commonDifference,
-                                             Fee fee) {
+                                             AbstractFee fee) {
         return new ArithmeticTrade( type,
                                     numberOfOrders,
                                     totalVolume,
@@ -58,7 +58,7 @@ public class TradeFactory {
                                            double minPrice,
                                            double maxPrice,
                                            double commonRatio,
-                                           Fee fee) {
+                                           AbstractFee fee) {
         return new GeometricTrade(  type,
                                     numberOfOrders,
                                     totalVolume,

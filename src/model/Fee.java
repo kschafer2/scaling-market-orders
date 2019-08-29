@@ -2,27 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 
-public abstract class Fee {
+public interface Fee {
 
-    protected BigDecimal value;
-    protected boolean isApplied;
-
-    public BigDecimal getValue() {
-        return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
-    }
-
-    public boolean isApplied() {
-        return isApplied;
-    }
-
-    public void isApplied(boolean value) {
-        this.isApplied = value;
-    }
-
-    abstract BigDecimal applyTo(BigDecimal applyToValue);
-
+    BigDecimal applyTo(BigDecimal value);
 }

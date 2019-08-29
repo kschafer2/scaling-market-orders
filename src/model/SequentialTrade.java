@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import static java.math.RoundingMode.HALF_DOWN;
 import static model.TradeType.BUY;
 
-public abstract class SequentialTrade extends Trade {
+public abstract class SequentialTrade extends AbstractTrade {
 
     private BigDecimal minOrderPrice;
     private BigDecimal maxOrderPrice;
@@ -22,7 +22,7 @@ public abstract class SequentialTrade extends Trade {
     }
 
     SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
-                    double maxOrderPrice, double differenceBetweenOrders, Fee fee) {
+                    double maxOrderPrice, double differenceBetweenOrders, AbstractFee fee) {
 
         this(type, numberOfOrders, totalVolume, minOrderPrice, maxOrderPrice, differenceBetweenOrders);
         this.fee = fee;
@@ -31,7 +31,7 @@ public abstract class SequentialTrade extends Trade {
     abstract BigDecimal getOrderVolumeAtIndex(int index);
 
     @Override
-    public Trade build() {
+    public AbstractTrade placeOrders() {
         if (marketOrders.isEmpty()) {
             for (int i = 0; i < numberOfOrders; ++i) {
                 addOrderAtIndex(i);
@@ -60,10 +60,9 @@ public abstract class SequentialTrade extends Trade {
         }
         else {
 //          priceInterval = (maxOrderPrice - minOrderPrice)/(numberOfOrders-1);
-            BigDecimal priceInterval = maxOrderPrice.subtract(minOrderPrice)
-                                        .setScale(scale(), HALF_DOWN)
-                        .divide(BigDecimal.valueOf(numberOfOrders - 1), HALF_DOWN)
-                        .setScale(scale(), HALF_DOWN);
+            BigDecimal priceInterval = maxOrderPrice.subtract(minOrderPrice).setScale(scale(), HALF_DOWN)
+                                        .divide(BigDecimal.valueOf(numberOfOrders - 1), HALF_DOWN)
+                                        .setScale(scale(), HALF_DOWN);
 
             BigDecimal previousMarketOrderPrice = marketOrders.get(index - 1).getAssetPrice();
 

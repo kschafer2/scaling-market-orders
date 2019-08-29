@@ -27,7 +27,7 @@ public class ArithmeticTrade extends SequentialTrade {
                            double minPrice,
                            double maxPrice,
                            double commonDifference,
-                           Fee fee) {
+                           AbstractFee fee) {
         super(type,
               numberOfOrders,
               totalVolume,

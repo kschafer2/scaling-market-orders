@@ -32,7 +32,7 @@ public class GeometricTrade extends SequentialTrade {
                           double minPrice,
                           double maxPrice,
                           double commonRatio,
-                          Fee fee) {
+                          AbstractFee fee) {
 
         super(  type,
                 numberOfOrders,
