@@ -1,4 +1,7 @@
-package model;
+package model.trades;
+
+import model.TradeType;
+import model.fees.AbstractFee;
 
 import java.math.BigDecimal;
 

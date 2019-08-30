@@ -1,4 +1,8 @@
-package model;
+package model.trades;
+
+import model.MarketOrder;
+import model.TradeType;
+import model.fees.AbstractFee;
 
 import java.util.Collections;
 
@@ -31,21 +35,21 @@ public class ManualTrade extends AbstractTrade {
         return this;
     }
 
-    public ManualTrade addOrder(MarketOrder marketOrder) {
+    public ManualTrade add(MarketOrder marketOrder) {
         marketOrders.add(marketOrder);
         update();
 
         return this;
     }
 
-    public ManualTrade deleteOrder(MarketOrder marketOrder) {
+    public ManualTrade delete(MarketOrder marketOrder) {
         marketOrders.remove(marketOrder);
         update();
 
         return this;
     }
 
-    public ManualTrade deleteOrderById(Long id) {
+    public ManualTrade delete(Long id) {
         marketOrders.stream()
                     .filter(order -> order.getId().equals(id))
                     .findFirst()
@@ -55,7 +59,7 @@ public class ManualTrade extends AbstractTrade {
         return this;
     }
 
-    public ManualTrade deleteOrderByIndex(int index) {
+    public ManualTrade delete(int index) {
         if(index < 0 || index > marketOrders.size()) {
             return this;
         }

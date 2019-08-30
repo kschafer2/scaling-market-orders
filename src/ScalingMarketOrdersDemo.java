@@ -1,7 +1,7 @@
 import factories.TradeFactory;
 import model.MarketOrder;
-import model.PercentageFee;
-import model.Trade;
+import model.fees.PercentageFee;
+import model.trades.Trade;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,15 +15,15 @@ public class ScalingMarketOrdersDemo {
         List<Trade> trades = Arrays.asList(
 
                 TradeFactory.manual(BUY)
-                        .addOrder(new MarketOrder(500, 1000))
-                        .addOrder(new MarketOrder(300, 500))
-                        .addOrder(new MarketOrder(800, 750))
+                        .add(new MarketOrder(500, 1000))
+                        .add(new MarketOrder(300, 500))
+                        .add(new MarketOrder(800, 750))
                         .addFee(new PercentageFee(1)),
 
                 TradeFactory.manual(SELL)
-                        .addOrder(new MarketOrder(500, 1000))
-                        .addOrder(new MarketOrder(300, 500))
-                        .addOrder(new MarketOrder(800, 750)),
+                        .add(new MarketOrder(500, 1000))
+                        .add(new MarketOrder(300, 500))
+                        .add(new MarketOrder(800, 750)),
 
                 TradeFactory.arithmetic(BUY,
                         5,
@@ -57,8 +57,8 @@ public class ScalingMarketOrdersDemo {
         );
 //
 //        ManualTrade trade1 = TradeFactory.manual(BUY)
-//                .addOrder(new MarketOrder(500, 300))
-//                .addOrder(new MarketOrder(100,100));
+//                .add(new MarketOrder(500, 300))
+//                .add(new MarketOrder(100,100));
 //
 //        System.out.println(trade1);
 
@@ -75,12 +75,12 @@ public class ScalingMarketOrdersDemo {
 //        MarketOrder marketOrder5 = new MarketOrder(500, 100);
 //
 //        ManualTrade manualTest = TradeFactory.manual(BUY)
-//                .addOrder(marketOrder)
-//                .addOrder(marketOrder1)
-//                .addOrder(marketOrder2)
-//                .addOrder(marketOrder3)
-//                .addOrder(marketOrder4)
-//                .addOrder(marketOrder5);
+//                .add(marketOrder)
+//                .add(marketOrder1)
+//                .add(marketOrder2)
+//                .add(marketOrder3)
+//                .add(marketOrder4)
+//                .add(marketOrder5);
 //
 //        System.out.println(manualTest);
 //

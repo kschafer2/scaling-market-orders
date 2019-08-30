@@ -1,4 +1,8 @@
-package model;
+package model.trades;
+
+import model.MarketOrder;
+import model.TradeType;
+import model.fees.AbstractFee;
 
 import java.math.BigDecimal;
 
@@ -9,7 +13,7 @@ public abstract class SequentialTrade extends AbstractTrade {
 
     private BigDecimal minOrderPrice;
     private BigDecimal maxOrderPrice;
-    BigDecimal differenceBetweenOrders;
+    protected BigDecimal differenceBetweenOrders;
 
     SequentialTrade(TradeType type, int numberOfOrders, double totalVolume, double minOrderPrice,
                     double maxOrderPrice, double differenceBetweenOrders) {

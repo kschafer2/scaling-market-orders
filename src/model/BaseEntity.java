@@ -2,7 +2,7 @@ package model;
 
 public abstract class BaseEntity {
 
-    Long id;
+    private Long id;
 
     {
         id = (long)hashCode();

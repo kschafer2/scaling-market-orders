@@ -1,6 +1,10 @@
 package factories;
 
-import model.*;
+import model.TradeType;
+import model.fees.AbstractFee;
+import model.trades.ArithmeticTrade;
+import model.trades.GeometricTrade;
+import model.trades.ManualTrade;
 
 public class TradeFactory {
 

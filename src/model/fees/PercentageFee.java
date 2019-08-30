@@ -1,4 +1,4 @@
-package model;
+package model.fees;
 
 import java.math.BigDecimal;
 

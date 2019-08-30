@@ -44,7 +44,7 @@ public class MarketOrder extends BaseEntity implements Comparable<MarketOrder>{
     @Override
     public String toString() {
         return "MarketOrder{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", assetPrice=" + assetPrice +
                 ", orderVolume=" + orderVolume +
                 '}';

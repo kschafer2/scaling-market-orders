@@ -1,4 +1,4 @@
-package model;
+package model.trades;
 
 public interface Trade {
 

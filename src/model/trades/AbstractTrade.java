@@ -1,4 +1,9 @@
-package model;
+package model.trades;
+
+import model.BaseEntity;
+import model.MarketOrder;
+import model.TradeType;
+import model.fees.AbstractFee;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,16 +11,17 @@ import java.util.List;
 
 public abstract class AbstractTrade extends BaseEntity implements Trade {
 
-    TradeType type;
-    int numberOfOrders;
-    BigDecimal totalVolume;
-    AbstractFee fee;
-    List<MarketOrder> marketOrders;
+    protected TradeType type;
+    protected int numberOfOrders;
+    protected BigDecimal totalVolume;
+    protected AbstractFee fee;
+    protected List<MarketOrder> marketOrders;
 
     {
         marketOrders = new ArrayList<>();
     }
 
+    //todo remove fee if a new fee is added
     protected void applyFee() {
         if (fee != null && !fee.isApplied()) {
             marketOrders.forEach(order ->
@@ -51,7 +57,7 @@ public abstract class AbstractTrade extends BaseEntity implements Trade {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append("id=").append(id)
+        stringBuilder.append("id=").append(getId())
                 .append(", type=").append(type)
                 .append(", numberOfOrders=").append(numberOfOrders)
                 .append(", totalVolume=").append(totalVolume);
